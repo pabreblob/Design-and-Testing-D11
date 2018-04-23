@@ -83,7 +83,7 @@ public class Volume extends DomainEntity {
 	}
 	
 	@NotNull
-	@ManyToMany(mappedBy = "customer")
+	@ManyToMany(mappedBy = "volumes")
 	public Collection<Customer> getCustomers() {
 		return customers;
 	}

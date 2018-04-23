@@ -47,6 +47,8 @@
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToSubscriptionConverter" />
 		<bean class="converters.SubscriptionToStringConverter" />
+		<bean class="converters.StringToFolderConverter" />
+		<bean class="converters.FolderToStringConverter" />
 				
 	</util:list>
 	

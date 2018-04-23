@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,6 +23,7 @@ public class Volume extends DomainEntity {
 	private String title;
 	private String description;
 	private int year;
+	private double price;
 	
 	private User creator;
 	private Collection<Customer> customers;
@@ -59,7 +61,16 @@ public class Volume extends DomainEntity {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
+	@Digits(fraction = 2, integer = 15)
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)

@@ -8,6 +8,15 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jstl:if test="${main == false}">
+	<jstl:if test="${back != null}">
+		<a href="folder/actor/list.do?parentId=${back}"><spring:message code="folder.goBack"/></a>
+	</jstl:if>
+	<jstl:if test="${back == null}">
+		<a href="folder/actor/list.do"><spring:message code="folder.goBack"/></a>
+	</jstl:if>
+</jstl:if>
+
 <display:table name="folders" id="row" requestURI="folder/actor/list.do" pagesize="10" class="displaytag">
 	
 	<spring:message code="folder.numberChildren" var="numberChildren"/>
@@ -15,7 +24,7 @@
 	
 	<jstl:if test="${row.children.size() != 0}">
 		<display:column>
-			<a href="folder/actor/list.do?folderId=${row.id}"><spring:message code="folder.seeChildren"/> </a>
+			<a href="folder/actor/list.do?parentId=${row.id}"><spring:message code="folder.seeChildren"/> </a>
 		</display:column>
 	</jstl:if>
 	<jstl:if test="${row.children.size() == 0}">
@@ -54,3 +63,4 @@
 	
 </display:table>
 
+<a><spring:message code="folder.sendMessage"/></a>

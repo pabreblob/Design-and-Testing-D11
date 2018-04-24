@@ -26,12 +26,16 @@ public class FolderActorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(required = false) final Integer parentId) {
 		final ModelAndView res = new ModelAndView("folder/list");
-		if (parentId == null)
+		if (parentId == null) {
 			res.addObject("folders", this.folderService.mainFolders());
-		else {
+			res.addObject("back", null);
+			res.addObject("main", true);
+		} else {
 			final Folder parent = this.folderService.findOne(parentId);
 			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
 			res.addObject("folders", parent.getChildren());
+			res.addObject("back", parent.getParent());
+			res.addObject("main", false);
 		}
 		return res;
 

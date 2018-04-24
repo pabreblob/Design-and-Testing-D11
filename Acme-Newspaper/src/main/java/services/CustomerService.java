@@ -19,6 +19,8 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Customer;
+import domain.Folder;
+import domain.Volume;
 import forms.UserForm;
 
 @Service
@@ -32,6 +34,9 @@ public class CustomerService {
 	private UserAccountService	userAccountService;
 
 	@Autowired
+	private FolderService		folderService;
+
+	@Autowired
 	private Validator			validator;
 
 
@@ -42,8 +47,18 @@ public class CustomerService {
 	public Customer create() {
 		final Customer res = new Customer();
 
+		final Collection<Volume> volumes = new ArrayList<Volume>();
+		res.setVolumes(volumes);
+
 		final UserAccount ua = this.userAccountService.create();
 		res.setUserAccount(ua);
+
+		res.setFolders(new ArrayList<Folder>());
+		res.getFolders().add(this.folderService.create());
+		res.getFolders().add(this.folderService.create());
+		res.getFolders().add(this.folderService.create());
+		res.getFolders().add(this.folderService.create());
+		res.getFolders().add(this.folderService.create());
 
 		final List<Authority> authorities = new ArrayList<Authority>();
 		final Authority auth = new Authority();
@@ -56,12 +71,21 @@ public class CustomerService {
 
 	public Customer save(final Customer customer) {
 		Assert.notNull(customer);
+		Assert.isTrue(!customer.getUserAccount().getUsername().isEmpty());
+		Assert.isTrue(!customer.getUserAccount().getPassword().isEmpty());
+		Assert.isTrue(!customer.getEmail().isEmpty());
+		Assert.isTrue(!customer.getName().isEmpty());
+		Assert.isTrue(!customer.getSurname().isEmpty());
 
 		if (customer.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			Assert.notNull(customer.getUserAccount().getPassword());
 			final String hash = encoder.encodePassword(customer.getUserAccount().getPassword(), null);
 			customer.getUserAccount().setPassword(hash);
+
+			customer.setFolders(new ArrayList<Folder>());
+			final Collection<Folder> folders = this.folderService.defaultFolders();
+			customer.getFolders().addAll(folders);
 		}
 
 		final List<Authority> authorities = new ArrayList<Authority>();

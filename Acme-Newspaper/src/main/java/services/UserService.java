@@ -18,6 +18,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Folder;
 import domain.User;
 import forms.UserForm;
 
@@ -31,6 +32,8 @@ public class UserService {
 	private UserAccountService	userAccountService;
 	@Autowired
 	private Validator			validator;
+	@Autowired
+	private FolderService		folderService;
 
 
 	public UserService() {
@@ -49,6 +52,13 @@ public class UserService {
 		final UserAccount ua = this.userAccountService.create();
 		user.setUserAccount(ua);
 
+		user.setFolders(new ArrayList<Folder>());
+		user.getFolders().add(this.folderService.create());
+		user.getFolders().add(this.folderService.create());
+		user.getFolders().add(this.folderService.create());
+		user.getFolders().add(this.folderService.create());
+		user.getFolders().add(this.folderService.create());
+
 		final List<Authority> authorities = new ArrayList<Authority>();
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.USER);
@@ -57,7 +67,6 @@ public class UserService {
 
 		return user;
 	}
-
 	public User save(final User user) {
 		Assert.notNull(user);
 		Assert.isTrue(!user.getUserAccount().getUsername().isEmpty());
@@ -70,6 +79,12 @@ public class UserService {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(user.getUserAccount().getPassword(), null);
 			user.getUserAccount().setPassword(hash);
+		}
+
+		if (user.getId() == 0) {
+			user.setFolders(new ArrayList<Folder>());
+			final Collection<Folder> folders = this.folderService.defaultFolders();
+			user.getFolders().addAll(folders);
 		}
 
 		final List<Authority> authorities = new ArrayList<Authority>();

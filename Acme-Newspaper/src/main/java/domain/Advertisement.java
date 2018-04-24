@@ -19,6 +19,7 @@ public class Advertisement extends DomainEntity {
 	private String title;
 	private String bannerUrl;
 	private String pageUrl;
+	private boolean marked;
 	
 	private CreditCard creditCard;
 	private Newspaper newspaper;
@@ -58,6 +59,14 @@ public class Advertisement extends DomainEntity {
 
 	public void setPageUrl(String pageUrl) {
 		this.pageUrl = pageUrl;
+	}
+
+	public boolean isMarked() {
+		return marked;
+	}
+
+	public void setMarked(boolean marked) {
+		this.marked = marked;
 	}
 
 	@Valid

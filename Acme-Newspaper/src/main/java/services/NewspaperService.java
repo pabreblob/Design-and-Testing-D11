@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.NewspaperRepository;
 import security.LoginService;
+import domain.Advertisement;
 import domain.Article;
 import domain.Newspaper;
 import domain.Subscription;
@@ -24,19 +25,22 @@ import domain.Volume;
 public class NewspaperService {
 
 	@Autowired
-	private NewspaperRepository	newspaperRepository;
+	private NewspaperRepository		newspaperRepository;
 
 	@Autowired
-	private UserService			userService;
+	private UserService				userService;
 
 	@Autowired
-	private ArticleService		articleService;
+	private ArticleService			articleService;
 
 	@Autowired
-	private SubscriptionService	subscriptionService;
+	private SubscriptionService		subscriptionService;
 
 	@Autowired
-	private TabooWordService	tabooWordService;
+	private TabooWordService		tabooWordService;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
 
 
 	public Newspaper create() {
@@ -97,6 +101,11 @@ public class NewspaperService {
 			this.articleService.delete(a);
 		for (final Subscription s : this.subscriptionService.getSubscriptionByNewspaper(newspaperId))
 			this.subscriptionService.delete(s.getId());
+
+		for (final Volume v : newspaper.getVolumes())
+			v.getNewspapers().remove(newspaper);
+		for (final Advertisement a : this.advertisementService.findAdvertisementByNewspaperId(newspaperId))
+			this.advertisementService.delete(a);
 		this.newspaperRepository.delete(newspaperId);
 	}
 

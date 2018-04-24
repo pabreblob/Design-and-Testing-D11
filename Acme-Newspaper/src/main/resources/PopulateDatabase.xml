@@ -1211,7 +1211,7 @@
 		</property>	
 	</bean>
 	<bean id="AdminInbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1224,7 +1224,7 @@
 		</property>	
 	</bean>
 	<bean id="AdminOutbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		<ref bean="Message1Sent" />
@@ -1243,7 +1243,7 @@
 		</property>	
 	</bean>
 	<bean id="AdminNotificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1256,7 +1256,7 @@
 		</property>	
 	</bean>
 	<bean id="AdminTrashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1269,7 +1269,7 @@
 		</property>	
 	</bean>
 	<bean id="AdminSpambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1282,7 +1282,7 @@
 		</property>	
 	</bean>
 	<bean id="User1Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		<ref bean="Message1Received" />
@@ -1301,7 +1301,7 @@
 		</property>	
 	</bean>
 	<bean id="User1Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1314,7 +1314,7 @@
 		</property>	
 	</bean>
 	<bean id="User1Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1327,7 +1327,7 @@
 		</property>	
 	</bean>
 	<bean id="User1Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1340,7 +1340,7 @@
 		</property>	
 	</bean>
 	<bean id="User1Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1366,7 +1366,7 @@
 		</property>	
 	</bean>
 		<bean id="User2Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1379,7 +1379,7 @@
 		</property>	
 	</bean>
 	<bean id="User2Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		<ref bean="Message7Sent" />
@@ -1393,7 +1393,7 @@
 		</property>	
 	</bean>
 	<bean id="User2Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1406,7 +1406,7 @@
 		</property>	
 	</bean>
 	<bean id="User2Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1419,7 +1419,7 @@
 		</property>	
 	</bean>
 	<bean id="User2Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1445,7 +1445,7 @@
 		</property>	
 	</bean>
 		<bean id="User3Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		
@@ -1459,7 +1459,7 @@
 		</property>	
 	</bean>
 	<bean id="User3Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1472,7 +1472,7 @@
 		</property>	
 	</bean>
 	<bean id="User3Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1485,7 +1485,7 @@
 		</property>	
 	</bean>
 	<bean id="User3Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1498,7 +1498,7 @@
 		</property>	
 	</bean>
 	<bean id="User3Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		<ref bean="Message7Received" />
@@ -1512,7 +1512,7 @@
 		</property>	
 	</bean>
 	<bean id="User4Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1525,7 +1525,7 @@
 		</property>	
 	</bean>
 	<bean id="User4Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1538,7 +1538,7 @@
 		</property>	
 	</bean>
 	<bean id="User4Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1551,7 +1551,7 @@
 		</property>	
 	</bean>
 	<bean id="User4Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1564,7 +1564,7 @@
 		</property>	
 	</bean>
 	<bean id="User4Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1577,7 +1577,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer1Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1590,7 +1590,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer1Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1603,7 +1603,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer1Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1616,7 +1616,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer1Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1629,7 +1629,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer1Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1642,7 +1642,7 @@
 		</property>	
 	</bean>
 		<bean id="Customer2Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1655,7 +1655,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer2Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1668,7 +1668,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer2Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1681,7 +1681,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer2Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1694,7 +1694,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer2Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1708,7 +1708,7 @@
 	</bean>
 	
 	 <bean id="Customer3Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1721,7 +1721,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer3Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1734,7 +1734,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer3Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1747,7 +1747,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer3Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1760,7 +1760,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer3Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1773,7 +1773,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer4Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1786,7 +1786,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer4Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1799,7 +1799,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer4Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1812,7 +1812,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer4Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1825,7 +1825,7 @@
 		</property>	
 	</bean>
 	<bean id="Customer4Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1838,7 +1838,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent1Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1851,7 +1851,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent1Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1864,7 +1864,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent1Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1877,7 +1877,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent1Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1890,7 +1890,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent1Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1903,7 +1903,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent2Inbox" class="domain.Folder">
-		<property name="name" value="in box" />
+		<property name="name" value="In box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1916,7 +1916,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent2Outbox" class="domain.Folder">
-		<property name="name" value="out box" />
+		<property name="name" value="Out box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1929,7 +1929,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent2Notificationbox" class="domain.Folder">
-		<property name="name" value="notification box" />
+		<property name="name" value="Notification box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1942,7 +1942,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent2Trashbox" class="domain.Folder">
-		<property name="name" value="trash box" />
+		<property name="name" value="Trash box" />
 		<property name="messages">
 		<list>
 		</list>	
@@ -1955,7 +1955,7 @@
 		</property>	
 	</bean>
 	<bean id="Agent2Spambox" class="domain.Folder">
-		<property name="name" value="spam box" />
+		<property name="name" value="Spam box" />
 		<property name="messages">
 		<list>
 		</list>	

@@ -501,10 +501,6 @@
 		<property name="volumes">
 		<list>
 		
-		<ref bean="Volume3" />
-		<ref bean="Volume5" />
-		<ref bean="Volume6" />
-		<ref bean="Volume7" />
 		</list>	
 		</property>
 	</bean>
@@ -521,7 +517,9 @@
 		<list>
 		<ref bean="Volume1" />
 		<ref bean="Volume2" />
-		<ref bean="Volume4" />
+		<ref bean="Volume5" />
+		<ref bean="Volume6" />
+		<ref bean="Volume7" />
 		</list>	
 		</property>
 	</bean>
@@ -595,7 +593,7 @@
 		<property name="creator"><ref bean="User2"></ref></property>
 		<property name="volumes">
 		<list>
-		<ref bean="Volume1" />
+		<ref bean="Volume4" />
 		</list>	
 		</property>
 	</bean>
@@ -610,7 +608,6 @@
 		<property name="creator"><ref bean="User3"></ref></property>
 		<property name="volumes">
 		<list>
-		<ref bean="Volume1" />
 		<ref bean="Volume3" />
 		</list>	
 		</property>
@@ -666,19 +663,7 @@
 		<property name="newspaper" ><ref bean="Newspaper8"></ref></property>
 		<property name="customer" ><ref bean="Customer2"></ref></property>
 	</bean>
-	<bean id="Subscription4" class="domain.Subscription">
-		<property name="creditCard"><bean class="domain.CreditCard">
-					<property name="holderName" value="customer2" />
-					<property name="brandName" value="brand1" />
-					<property name="number" value="4916524284571696" />
-					<property name="expMonth" value="10" />
-					<property name="expYear" value="20" />
-					<property name="cvv" value="136" />
-				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper7"></ref></property>
-		<property name="customer" ><ref bean="Customer2"></ref></property>
-		<property name="volume" value="true" />
-	</bean>
+
 	<bean id="Article1" class="domain.Article">
 		<property name="title" value="article1" />
 		<property name="moment" value="2017/02/24 23:00" />
@@ -1111,8 +1096,6 @@
 		<ref bean="Newspaper3" />
 		<ref bean="Newspaper4" />
 		<ref bean="Newspaper5" />
-		<ref bean="Newspaper7" />
-		<ref bean="Newspaper8" />
 		</list>	
 		</property>	
 	</bean>
@@ -1140,7 +1123,7 @@
 		<property name="description" value="voldesc3" />
 		<property name="year" value="2018" />
 		<property name="price" value="20.0" />
-		<property name="creator" ><ref bean="User1"></ref></property>
+		<property name="creator" ><ref bean="User3"></ref></property>
 		<property name="customers">
 		<list>
 		<ref bean="Customer1" />
@@ -1149,7 +1132,7 @@
 		</property>
 		<property name="newspapers">
 		<list>
-		<ref bean="Newspaper1" />
+		<ref bean="Newspaper2" />
 		<ref bean="Newspaper8" />
 		</list>	
 		</property>	
@@ -1159,7 +1142,7 @@
 		<property name="description" value="voldesc4" />
 		<property name="year" value="2018" />
 		<property name="price" value="0.0" />
-		<property name="creator" ><ref bean="User1"></ref></property>
+		<property name="creator" ><ref bean="User2"></ref></property>
 		<property name="customers">
 		<list>
 		<ref bean="Customer1" />
@@ -1169,7 +1152,7 @@
 		<property name="newspapers">
 		<list>
 
-		<ref bean="Newspaper2" />
+		<ref bean="Newspaper7" />
 	
 		</list>	
 		</property>	
@@ -1188,7 +1171,7 @@
 		</property>
 		<property name="newspapers">
 		<list>
-		<ref bean="Newspaper1" />
+		<ref bean="Newspaper2" />
 		
 		</list>	
 		</property>	
@@ -1206,7 +1189,7 @@
 		</property>
 		<property name="newspapers">
 		<list>
-		<ref bean="Newspaper1" />
+		<ref bean="Newspaper2" />
 		
 		</list>	
 		</property>	
@@ -1223,7 +1206,7 @@
 		</property>
 		<property name="newspapers">
 		<list>
-		<ref bean="Newspaper1" />
+		<ref bean="Newspaper2" />
 		</list>	
 		</property>	
 	</bean>

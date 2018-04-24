@@ -26,6 +26,7 @@
 	<form:hidden path="creator" />
 	<form:hidden path="publicationDate" />
 	<form:hidden path="marked" />
+	<form:hidden path="volumes" />
 	
 
 	<acme:textbox code="newspaper.title" path="title" /><br />

@@ -20,6 +20,7 @@
 
 		<form:hidden path="customer" />
 		<form:hidden path="newspaper" />
+		<form:hidden path="volume" />
 
 		<acme:textbox code="subscription.holderName" path="creditCard.holderName" />
 		<acme:textbox code="subscription.brandName" path="creditCard.brandName" />

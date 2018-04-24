@@ -29,6 +29,7 @@ public class SubscriptionService {
 	public Subscription create() {
 		final Subscription s = new Subscription();
 		s.setCustomer(this.customerService.findByPrincipal());
+		s.setVolume(false);
 		return s;
 	}
 

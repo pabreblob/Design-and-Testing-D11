@@ -113,6 +113,29 @@ public class FolderService {
 
 		this.folderRepository.delete(f);
 	}
+	public void addChild(final Folder child, final Folder parent) {
+		//TODO: FALTA COMPROBAR QUE 'parent' SEA HIJO O DESCENDENCIA DE 'child'
+		//==============================================================
+		Assert.notNull(child);
+		Assert.isTrue(!StringUtils.isEmpty(child.getName()));
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
+
+		final Folder f = this.findFolderByNameAndActor(child.getName());
+		if (f != null)
+			Assert.isTrue(f.getId() == child.getId());
+
+		Assert.isTrue(!child.getName().equals("In box"));
+		Assert.isTrue(!child.getName().equals("Out box"));
+		Assert.isTrue(!child.getName().equals("Spam box"));
+		Assert.isTrue(!child.getName().equals("Trash box"));
+		Assert.isTrue(!child.getName().equals("Notification box"));
+
+		child.setParent(parent);
+
+		final Folder saved = this.folderRepository.save(child);
+		this.actorService.findByPrincipal().getFolders().add(saved);
+		parent.getChildren().add(saved);
+	}
 	public Folder reconstruct(final Folder folder, final BindingResult br) {
 		Folder res;
 		if (folder.getId() == 0) {
@@ -136,5 +159,10 @@ public class FolderService {
 	public Folder findFolderByNameAndActor(final String s) {
 		return this.folderRepository.findFolderByNameAndActor(this.actorService.findByPrincipal().getId(), s);
 	}
-
+	public Folder findOne(final int id) {
+		return this.folderRepository.findOne(id);
+	}
+	public Collection<Folder> mainFolders() {
+		return this.folderRepository.mainFolders(this.actorService.findByPrincipal().getId());
+	}
 }

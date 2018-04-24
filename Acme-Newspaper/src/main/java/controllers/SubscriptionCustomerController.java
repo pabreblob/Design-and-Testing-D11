@@ -47,7 +47,7 @@ public class SubscriptionCustomerController extends AbstractController {
 		s.setNewspaper(this.newspaperService.findOne(newspaperId));
 		result = new ModelAndView("subscription/edit");
 		result.addObject("subscription", s);
-		result.addObject("newspaperUrl", "newspaper/display.do" + newspaperId);
+		result.addObject("newspaperUrl", "newspaper/display.do?newspaperId=" + newspaperId);
 		result.addObject("requestURI", "subscription/customer/subscribe.do");
 		return result;
 	}

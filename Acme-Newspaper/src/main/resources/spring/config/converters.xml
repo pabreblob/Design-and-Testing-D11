@@ -49,6 +49,11 @@
 		<bean class="converters.SubscriptionToStringConverter" />
 		<bean class="converters.StringToFolderConverter" />
 		<bean class="converters.FolderToStringConverter" />
+		<bean class="converters.StringToAdvertisementConverter" />
+		<bean class="converters.AdvertisementToStringConverter" />
+		<bean class="converters.StringToAgentConverter" />
+		<bean class="converters.AgentToStringConverter" />
+		
 				
 	</util:list>
 	

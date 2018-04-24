@@ -60,6 +60,7 @@ public class SubscriptionCustomerController extends AbstractController {
 		} else
 			try {
 				this.subscriptionService.save(s);
+				Assert.isTrue(!s.isVolume());
 				res = new ModelAndView("redirect:/newspaper/display.do?newspaperId=" + s.getNewspaper().getId());
 			} catch (final Throwable oops) {
 				res = new ModelAndView("newspaper/edit");

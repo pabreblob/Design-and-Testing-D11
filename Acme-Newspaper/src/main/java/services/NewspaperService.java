@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import domain.Article;
 import domain.Newspaper;
 import domain.Subscription;
 import domain.TabooWord;
+import domain.Volume;
 
 @Service
 @Transactional
@@ -40,6 +42,7 @@ public class NewspaperService {
 	public Newspaper create() {
 		final Newspaper res = new Newspaper();
 		res.setCreator(this.userService.findByPrincipal());
+		res.setVolumes(new ArrayList<Volume>());
 		return res;
 	}
 	public Collection<Newspaper> findAll() {
@@ -120,4 +123,8 @@ public class NewspaperService {
 	public Collection<Newspaper> findNewspapersByKeyword(final String keyword) {
 		return this.newspaperRepository.findNewspapersByKeyword(keyword);
 	}
+
+	//public Collection<Newspaper> findNewspapersByvolumeId(final int volumeId) {
+	//	return this.newspaperRepository.findNewspapersByVolumeId(volumeId);
+	//}
 }

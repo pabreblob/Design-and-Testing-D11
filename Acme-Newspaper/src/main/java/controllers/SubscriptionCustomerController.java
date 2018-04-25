@@ -22,8 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.NewspaperService;
 import services.SubscriptionService;
+import services.VolumeService;
 import domain.Newspaper;
 import domain.Subscription;
+import domain.Volume;
+import forms.SubscriptionForm;
 
 @Controller
 @RequestMapping("/subscription/customer")
@@ -34,6 +37,9 @@ public class SubscriptionCustomerController extends AbstractController {
 
 	@Autowired
 	NewspaperService	newspaperService;
+
+	@Autowired
+	VolumeService		volumeService;
 
 
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
@@ -69,4 +75,38 @@ public class SubscriptionCustomerController extends AbstractController {
 			}
 		return res;
 	}
+
+	@RequestMapping(value = "/subscribeVolume", method = RequestMethod.GET)
+	public ModelAndView subscribeVolume(final int volumeId) {
+		ModelAndView result;
+		final SubscriptionForm s = new SubscriptionForm();
+		final Volume v = this.volumeService.findOne(volumeId);
+		Assert.notNull(v);
+		s.setVolume(v);
+		result = new ModelAndView("subscription/subscribevolume");
+		result.addObject("subscriptionForm", s);
+		result.addObject("requestURI", "subscription/customer/subscribeVolume.do");
+		return result;
+	}
+	@RequestMapping(value = "/subscribeVolume", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final SubscriptionForm s, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors()) {
+			res = new ModelAndView("subscription/subscribevolume");
+			res.addObject("subscriptionForm", s);
+		} else
+			try {
+
+				System.out.println(s.getCreditCard());
+				res = null;
+				//res = new ModelAndView("redirect:/volume/display.do?volumeId=" + s.getNewspaper().getId());
+			} catch (final Throwable oops) {
+				res = new ModelAndView("newspaper/subscribevolume");
+				res.addObject("subscriptionForm", s);
+				res.addObject("message", "newspaper.commit.error");
+			}
+
+		return res;
+	}
+
 }

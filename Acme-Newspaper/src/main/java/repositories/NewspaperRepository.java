@@ -31,4 +31,12 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 	//Periódicos de un volume
 	//@Query("select n from Newspaper n join n.volumes v where v.id = ?1 and n.publicationDate != null")
 	//Collection<Newspaper> findNewspapersByVolumeId(int volumeId);
+
+	//Periódicos con anuncios del agente
+	@Query("select distinct n from Advertisement a join a.newspaper n where a.owner.id = ?1 and n.publicationDate != null")
+	Collection<Newspaper> findNewspapersWithAdvertisementByAgentId(int agentId);
+
+	//Periódicos publicados de un usuario
+	@Query("select n from Newspaper n where n.publicationDate != null and n.creator.id = ?1")
+	Collection<Newspaper> findPublicatedNewspaperByUserId(int userId);
 }

@@ -46,6 +46,19 @@ public class NewspapersUserController extends AbstractController {
 		return res;
 	}
 
+	//	Listing for add to volumen
+	@RequestMapping(value = "/list-available", method = RequestMethod.GET)
+	public ModelAndView listAvailable(@RequestParam final int volumeId) {
+		ModelAndView res;
+		Collection<Newspaper> newspapers;
+		newspapers = this.newspaperService.findPublicatedNewspaperByPrincipal(volumeId);
+		res = new ModelAndView("newspaper/list");
+		res.addObject("newspapers", newspapers);
+		res.addObject("volumeId", volumeId);
+		res.addObject("requestURI", "newspaper/user/list-available.do");
+		return res;
+	}
+
 	//Creating
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {

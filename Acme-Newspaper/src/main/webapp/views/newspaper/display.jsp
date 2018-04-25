@@ -56,6 +56,13 @@
 	
 	<jstl:if test="${customerLogged == false}">
 	<jstl:if test="${somethingLogged == true}">
+	<security:authorize access="hasRole('AGENT')">
+	<display:column  title="${titleHeader}" >
+
+			<a href="article/agent/display.do?articleId=${a.id}"> <jstl:out value="${a.title}"></jstl:out>
+			</a>
+	</display:column>
+	</security:authorize>
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column  title="${titleHeader}" >
 

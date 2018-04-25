@@ -23,6 +23,22 @@
 <display:table name="newspapers" id="n" keepStatus = "true" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 	
+	<jstl:if test="${requestURI == 'newspaper/user/list-available.do'}">
+	<display:column>
+	<a href="volume/user/add-newspaper.do?volumeId=${volumeId}&newspaperId=${n.id}"> <spring:message
+					code="newspaper.volume" />
+	</a>
+	</display:column>
+	</jstl:if>
+	
+	<jstl:if test="${requestURI == 'newspaper/agent/list-without.do'}">
+	<display:column>
+	<a href="advertisement/agent/create.do?newspaperId=${n.id}"> <spring:message
+					code="newspaper.advert" />
+	</a>
+	</display:column>
+	</jstl:if>
+	
 	<jstl:if test="${requestURI == 'newspaper/user/list.do'}">
 	<display:column>
 	<jstl:if test="${n.publicationDate == null }">

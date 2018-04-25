@@ -14,10 +14,12 @@ import org.springframework.util.Assert;
 import repositories.NewspaperRepository;
 import security.LoginService;
 import domain.Advertisement;
+import domain.Agent;
 import domain.Article;
 import domain.Newspaper;
 import domain.Subscription;
 import domain.TabooWord;
+import domain.User;
 import domain.Volume;
 
 @Service
@@ -41,6 +43,12 @@ public class NewspaperService {
 
 	@Autowired
 	private AdvertisementService	advertisementService;
+
+	@Autowired
+	private AgentService			agentService;
+
+	@Autowired
+	private VolumeService			volumeService;
 
 
 	public Newspaper create() {
@@ -136,4 +144,29 @@ public class NewspaperService {
 	//public Collection<Newspaper> findNewspapersByvolumeId(final int volumeId) {
 	//	return this.newspaperRepository.findNewspapersByVolumeId(volumeId);
 	//}
+
+	public Collection<Newspaper> findNewspapersWithAdvertisementByAgent() {
+		final Agent a = this.agentService.findByPrincipal();
+		Assert.notNull(a);
+		return this.newspaperRepository.findNewspapersWithAdvertisementByAgentId(a.getId());
+	}
+
+	public Collection<Newspaper> findNewspapersWithoutAdvertisementByAgent() {
+		final Agent a = this.agentService.findByPrincipal();
+		Assert.notNull(a);
+		final Collection<Newspaper> withAdverts = this.findNewspapersWithAdvertisementByAgent();
+		System.out.println("\n\nCon anuncios: " + withAdverts);
+		final Collection<Newspaper> allPublish = this.findPublicatedNewspaper();
+		System.out.println("\n\nTodos: " + allPublish);
+		allPublish.removeAll(withAdverts);
+		System.out.println("\n\nLos que no tienen anuncios: " + allPublish);
+		return allPublish;
+	}
+	public Collection<Newspaper> findPublicatedNewspaperByPrincipal(final int volumeId) {
+		final User u = this.userService.findByPrincipal();
+		final Collection<Newspaper> added = this.volumeService.findOne(volumeId).getNewspapers();
+		final Collection<Newspaper> res = this.newspaperRepository.findPublicatedNewspaperByUserId(u.getId());
+		res.remove(added);
+		return res;
+	}
 }

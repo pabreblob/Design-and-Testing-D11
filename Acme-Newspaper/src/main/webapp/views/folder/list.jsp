@@ -47,17 +47,26 @@
 	<spring:message code="folder.name" var="name"/>
 	<display:column property="name" title="${name}" />
 
-	<spring:message code="folder.edit" var="edit"/>
-	<display:column title="${edit}">
-		<jstl:if test="${row.name != 'In box' and row.name != 'Out box' and row.name != 'Notification box' and row.name != 'Trash box' and row.name != 'Spam box'}">
-			<a href="folder/actor/edit.do?folderId=${row.id}&folderParent=${idFolder}"><spring:message code="folder.edit"/></a>
-		</jstl:if>
-	</display:column>
-	
 	<spring:message code="folder.move" var="move"/>
 	<display:column title="${move}">
 		<jstl:if test="${row.name != 'In box' and row.name != 'Out box' and row.name != 'Notification box' and row.name != 'Trash box' and row.name != 'Spam box'}">
-			<a href="folder/actor/move.do?folderId=${row.id}&folderParent=${idFolder}"><spring:message code="folder.move"/></a>
+			<a href="folder/actor/move.do?folderId=${row.id}"><spring:message code="folder.move"/></a>
+		</jstl:if>
+	</display:column>
+
+	<spring:message code="folder.edit" var="edit"/>
+	<display:column title="${edit}">
+		<jstl:if test="${row.name != 'In box' and row.name != 'Out box' and row.name != 'Notification box' and row.name != 'Trash box' and row.name != 'Spam box'}">
+			<a href="folder/actor/edit.do?folderId=${row.id}"><spring:message code="folder.edit"/></a>
+		</jstl:if>
+	</display:column>
+	
+	<spring:message code="folder.delete" var="delete"/>
+	<display:column title="${delete}">
+		<jstl:if test="${row.name != 'In box' and row.name != 'Out box' and row.name != 'Notification box' and row.name != 'Trash box' and row.name != 'Spam box'}">
+			<jstl:if test="${row.children.size() == 0}">
+				<a href="folder/actor/delete.do?folderId=${row.id}"><spring:message code="folder.delete"/></a>
+			</jstl:if>
 		</jstl:if>
 	</display:column>
 	

@@ -32,12 +32,25 @@ public class FolderActorController extends AbstractController {
 			res.addObject("main", true);
 		} else {
 			final Folder parent = this.folderService.findOne(parentId);
+			Assert.notNull(parent);
 			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
 			res.addObject("folders", parent.getChildren());
 			res.addObject("back", parent.getParent());
 			res.addObject("main", false);
 		}
 		return res;
+	}
 
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int folderId) {
+		final Folder f = this.folderService.findOne(folderId);
+		Assert.notNull(f);
+		Assert.notNull(this.actorService.findByPrincipal().getFolders().contains(f));
+		final Folder parent = f.getParent();
+		this.folderService.delete(f);
+		if (parent == null)
+			return this.list(null);
+		else
+			return this.list(parent.getId());
 	}
 }

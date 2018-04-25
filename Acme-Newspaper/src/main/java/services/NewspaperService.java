@@ -155,18 +155,15 @@ public class NewspaperService {
 		final Agent a = this.agentService.findByPrincipal();
 		Assert.notNull(a);
 		final Collection<Newspaper> withAdverts = this.findNewspapersWithAdvertisementByAgent();
-		System.out.println("\n\nCon anuncios: " + withAdverts);
 		final Collection<Newspaper> allPublish = this.findPublicatedNewspaper();
-		System.out.println("\n\nTodos: " + allPublish);
 		allPublish.removeAll(withAdverts);
-		System.out.println("\n\nLos que no tienen anuncios: " + allPublish);
 		return allPublish;
 	}
 	public Collection<Newspaper> findPublicatedNewspaperByPrincipal(final int volumeId) {
 		final User u = this.userService.findByPrincipal();
 		final Collection<Newspaper> added = this.volumeService.findOne(volumeId).getNewspapers();
 		final Collection<Newspaper> res = this.newspaperRepository.findPublicatedNewspaperByUserId(u.getId());
-		res.remove(added);
+		res.removeAll(added);
 		return res;
 	}
 }

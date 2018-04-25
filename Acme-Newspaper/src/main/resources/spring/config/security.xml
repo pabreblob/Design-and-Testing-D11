@@ -61,6 +61,7 @@
 		<security:intercept-url pattern="/user/user/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/user/display.do" access="permitAll" /> 
 		
+		<security:intercept-url pattern="/newspaper/agent/**" access="hasRole('AGENT')" />
 		<security:intercept-url pattern="/newspaper/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/newspaper/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/newspaper/**" access="permitAll" />

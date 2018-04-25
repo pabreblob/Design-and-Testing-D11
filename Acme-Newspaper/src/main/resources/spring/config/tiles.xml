@@ -36,6 +36,7 @@
 		<value>/views/followUp/tiles.xml</value>
 		<value>/views/tabooword/tiles.xml</value>
 		<value>/views/folder/tiles.xml</value>
+		<value>/views/volume/tiles.xml</value>
 	</util:list>
 
 </beans>

@@ -36,6 +36,7 @@
 		<value>/views/followUp/messages</value>
 		<value>/views/tabooword/messages</value>
 		<value>/views/folder/messages</value>
+		<value>/views/volume/messages</value>
 	</util:list>
 
 </beans>

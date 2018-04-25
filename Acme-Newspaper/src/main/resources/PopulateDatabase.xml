@@ -613,7 +613,7 @@
 		</property>
 	</bean>
 	<bean id="Newspaper9" class="domain.Newspaper">
-		<property name="title" value="newspape9" />
+		<property name="title" value="newspaper9" />
 		<property name="publicationDate" value="2017/02/20 23:00" />
 		<property name="description" value="This is newspaper9" />
 		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
@@ -989,7 +989,7 @@
 		<property name="owner" ><ref bean="Agent1"></ref></property>
 	</bean>
 	<bean id="Advertisement2" class="domain.Advertisement">
-		<property name="title" value="advertisement2" />
+		<property name="title" value="viagra" />
 		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
@@ -1000,8 +1000,9 @@
 					<property name="expYear" value="18" />
 					<property name="cvv" value="134" />
 				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="newspaper" ><ref bean="Newspaper5"></ref></property>
 		<property name="owner" ><ref bean="Agent1"></ref></property>
+		<property name="marked" value="true" />
 	</bean>
 	<bean id="Advertisement3" class="domain.Advertisement">
 		<property name="title" value="advertisement3" />
@@ -1015,7 +1016,7 @@
 					<property name="expYear" value="18" />
 					<property name="cvv" value="134" />
 				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="newspaper" ><ref bean="Newspaper8"></ref></property>
 		<property name="owner" ><ref bean="Agent1"></ref></property>
 	</bean>
 	<bean id="Advertisement4" class="domain.Advertisement">
@@ -1030,7 +1031,7 @@
 					<property name="expYear" value="18" />
 					<property name="cvv" value="134" />
 				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="newspaper" ><ref bean="Newspaper7"></ref></property>
 		<property name="owner" ><ref bean="Agent1"></ref></property>
 	</bean>
 	<bean id="Advertisement5" class="domain.Advertisement">
@@ -1045,7 +1046,7 @@
 					<property name="expYear" value="18" />
 					<property name="cvv" value="134" />
 				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="newspaper" ><ref bean="Newspaper4"></ref></property>
 		<property name="owner" ><ref bean="Agent1"></ref></property>
 	</bean>
 	<bean id="Advertisement6" class="domain.Advertisement">
@@ -1060,7 +1061,7 @@
 					<property name="expYear" value="18" />
 					<property name="cvv" value="134" />
 				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="newspaper" ><ref bean="Newspaper3"></ref></property>
 		<property name="owner" ><ref bean="Agent1"></ref></property>
 	</bean>
 	<bean id="Advertisement7" class="domain.Advertisement">
@@ -1075,7 +1076,7 @@
 					<property name="expYear" value="18" />
 					<property name="cvv" value="127" />
 				</bean></property>
-		<property name="newspaper" ><ref bean="Newspaper3"></ref></property>
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
 		<property name="owner" ><ref bean="Agent2"></ref></property>
 	</bean>
 	<bean id="Volume1" class="domain.Volume">

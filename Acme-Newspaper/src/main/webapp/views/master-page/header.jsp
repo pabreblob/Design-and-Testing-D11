@@ -45,7 +45,14 @@
 				<security:authorize access="hasRole('CUSTOMER')">
 				<!-- Acciones para los Customer -->
 					<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
-				</security:authorize> 	
+				</security:authorize>
+				
+				<security:authorize access="hasRole('AGENT')">
+				<!-- Acciones para Agents -->
+					<li><a href="newspaper/agent/list.do"><spring:message code="master.page.newspaper.advertised" /></a></li>
+					<li><a href="newspaper/agent/list-without.do"><spring:message code="master.page.newspaper.not-advertised" /></a></li>
+				</security:authorize>
+						 	
 										
 				<li><a href="newspaper/search.do"><spring:message code="master.page.newspaper.search" /></a></li>
 			</ul>
@@ -69,6 +76,30 @@
 			</ul>
 		</li>
 		
+		<!-- Acciones de Volume -->
+		<li><a class="fNiv"><spring:message code="master.page.volume" /></a>
+			<ul>
+				<li class="arrow"></li>
+				
+				<security:authorize access="!hasRole('CUSTOMER')">
+				<!-- Acciones para todos los usuarios excepto Customers -->
+					<li><a href="volume/list.do"><spring:message code="master.page.volume.list"/></a></li>
+				</security:authorize>
+				
+				<security:authorize access="hasRole('CUSTOMER')">
+				<!-- Acciones para los Customer -->
+					<li><a href="volume/customer/list.do"><spring:message code="master.page.customer.volume.list"/></a></li>
+				</security:authorize>
+				
+				<security:authorize access="hasRole('USER')">
+				<!-- Acciones para Users -->
+					<li><a href="volume/user/create.do"><spring:message code="master.page.user.volume.create"/></a></li>
+					<li><a href="volume/user/list-created.do"><spring:message code="master.page.user.volume.list-created"/></a></li>
+				</security:authorize>
+		
+			</ul>
+		</li>
+		
 		<security:authorize access="hasRole('ADMIN')">
 		<!-- Acciones para Admins -->
 			<li><a class="fNiv"><spring:message	code="master.page.admin" /></a>
@@ -79,7 +110,8 @@
 					<li><a href="article/admin/list-marked.do"><spring:message code="master.page.admin.article.marked" /></a></li>
 					<li><a href="followUp/admin/list-marked.do"><spring:message code="master.page.admin.followup.marked" /></a></li>
 					<li><a href="chirp/admin/list-marked.do"><spring:message code="master.page.admin.chirp.marked" /></a></li>
-					<li><a href="tabooword/admin/list.do"><spring:message code="master.page.admin.tabooword" /></a></li>
+					<li><a href="volume/admin/list-marked.do"><spring:message code="master.page.admin.volume.marked" /></a></li>
+					<li><a href="tabooword/admin/list.do"><spring:message code="master.page.admin.tabooword.list" /></a></li>
 				</ul>
 			</li>
 			
@@ -91,6 +123,7 @@
 					<li><a href="article/admin/list.do"><spring:message code="master.page.admin.article.list" /></a></li>
 					<li><a href="followUp/admin/list-all.do"><spring:message code="master.page.admin.followup.list"/></a></li>
 					<li><a href="chirp/admin/list.do"><spring:message code="master.page.admin.chirp.list" /></a></li>
+					<li><a href="volume/admin/list.do"><spring:message code="master.page.admin.volume.list"/></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -121,6 +154,7 @@
 			
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv" href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
+			<li><a class="fNiv" href="folder/actor/list.do"><spring:message code="master.page.folder.list"/></a></li>
 		</security:authorize>
 		
 		<!-- Cambio de idioma -->

@@ -75,12 +75,16 @@ public class FolderActorController extends AbstractController {
 		if (StringUtils.isEmpty(parentId)) {
 			if (this.folderService.findFolderByNameAndActor(nameFolder) != null)
 				return this.listWithMessage(null, "folder.errorNameInUse");
+			else if (nameFolder.replace(" ", "").length() == 0)
+				return this.listWithMessage(null, "folder.errorNameBlank");
 			else {
 				this.folderService.createNewFolder(nameFolder);
 				return this.list(null);
 			}
 		} else if (this.folderService.findFolderByNameAndActor(nameFolder) != null)
-			return this.listWithMessage(null, "folder.errorNameInUse");
+			return this.listWithMessage(new Integer(parentId), "folder.errorNameInUse");
+		else if (nameFolder.replace(" ", "").length() == 0)
+			return this.listWithMessage(new Integer(parentId), "folder.errorNameBlank");
 		else {
 			final Folder parent = this.folderService.findOne(new Integer(parentId));
 			Assert.notNull(parent);

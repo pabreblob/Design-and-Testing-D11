@@ -115,6 +115,7 @@ public class FolderService {
 	public Folder createNewFolder(final String name) {
 		Assert.notNull(name);
 		Assert.isTrue(!StringUtils.isEmpty(name));
+		Assert.isTrue(name.replace(" ", "").length() != 0);
 		Assert.isTrue(!name.equals("In box"));
 		Assert.isTrue(!name.equals("Out box"));
 		Assert.isTrue(!name.equals("Spam box"));
@@ -132,7 +133,7 @@ public class FolderService {
 		Assert.notNull(child);
 		Assert.isTrue(!StringUtils.isEmpty(child.getName()));
 		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
-
+		Assert.isTrue(child.getName().replace(" ", "").length() != 0);
 		final Folder f = this.findFolderByNameAndActor(child.getName());
 		Assert.isNull(f);
 

@@ -31,7 +31,6 @@ public class FolderService {
 
 	//@Autowired
 	//private MessageService		messageService;
-
 	public Folder create() {
 		final Folder res = new Folder();
 
@@ -113,16 +112,29 @@ public class FolderService {
 
 		this.folderRepository.delete(f);
 	}
+	public Folder createNewFolder(final String name) {
+		Assert.notNull(name);
+		Assert.isTrue(!StringUtils.isEmpty(name));
+		Assert.isTrue(!name.equals("In box"));
+		Assert.isTrue(!name.equals("Out box"));
+		Assert.isTrue(!name.equals("Spam box"));
+		Assert.isTrue(!name.equals("Trash box"));
+		Assert.isTrue(!name.equals("Notification box"));
+		final Folder f = this.findFolderByNameAndActor(name);
+		Assert.isNull(f);
+		final Folder res = this.create();
+		res.setName(name);
+		final Folder saved = this.folderRepository.save(res);
+		this.actorService.findByPrincipal().getFolders().add(saved);
+		return saved;
+	}
 	public void addChild(final Folder child, final Folder parent) {
-		//TODO: FALTA COMPROBAR QUE 'parent' SEA HIJO O DESCENDENCIA DE 'child'
-		//==============================================================
 		Assert.notNull(child);
 		Assert.isTrue(!StringUtils.isEmpty(child.getName()));
 		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
 
 		final Folder f = this.findFolderByNameAndActor(child.getName());
-		if (f != null)
-			Assert.isTrue(f.getId() == child.getId());
+		Assert.isNull(f);
 
 		Assert.isTrue(!child.getName().equals("In box"));
 		Assert.isTrue(!child.getName().equals("Out box"));

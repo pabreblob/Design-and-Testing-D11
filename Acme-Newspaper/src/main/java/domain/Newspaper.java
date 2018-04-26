@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -32,16 +33,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 })
 public class Newspaper extends DomainEntity {
 
-	private String	title;
-	private Date	publicationDate;
-	private String	description;
-	private String	pictureUrl;
-	private double	price;
-	private boolean	free;
-	private boolean	marked;
+	private String				title;
+	private Date				publicationDate;
+	private String				description;
+	private String				pictureUrl;
+	private double				price;
+	private boolean				free;
+	private boolean				marked;
 
-	private User	creator;
-	private Collection<Volume> volumes;
+	private User				creator;
+	private Collection<Volume>	volumes;
 
 
 	public Newspaper() {
@@ -92,6 +93,7 @@ public class Newspaper extends DomainEntity {
 	}
 
 	@Digits(fraction = 2, integer = 15)
+	@Min(0)
 	public double getPrice() {
 		return this.price;
 	}
@@ -130,13 +132,11 @@ public class Newspaper extends DomainEntity {
 	@NotNull
 	@ManyToMany(mappedBy = "newspapers")
 	public Collection<Volume> getVolumes() {
-		return volumes;
+		return this.volumes;
 	}
 
-	public void setVolumes(Collection<Volume> volumes) {
+	public void setVolumes(final Collection<Volume> volumes) {
 		this.volumes = volumes;
 	}
-	
-	
 
 }

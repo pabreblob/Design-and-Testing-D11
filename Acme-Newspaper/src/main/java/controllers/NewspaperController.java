@@ -65,6 +65,7 @@ public class NewspaperController extends AbstractController {
 		Boolean customerLogged = false;
 		Boolean somethingLogged = false;
 		Boolean needPay = false;
+		Boolean free = false;
 		Boolean available = false;
 		final Newspaper newspaper = this.newspaperService.findOne(newspaperId);
 		Assert.notNull(newspaper);
@@ -73,7 +74,7 @@ public class NewspaperController extends AbstractController {
 			LoginService.getPrincipal().getId();
 			somethingLogged = true;
 		} catch (final Exception e) {
-			// TODO: handle exception
+
 		}
 		try {
 			if (this.customerService.findByPrincipal() != null)
@@ -87,7 +88,15 @@ public class NewspaperController extends AbstractController {
 
 		if (newspaper.isFree()) {
 			subscribed = true;
+			free = true;
 			somethingLogged = true;
+		}
+
+		try {
+			this.userService.findByPrincipal();
+			free = true;
+		} catch (final Exception e) {
+
 		}
 
 		//Comprobaciones para saber si lo puede ver o no.
@@ -125,6 +134,7 @@ public class NewspaperController extends AbstractController {
 		res.addObject("articles", this.articleService.findArticlesByNewspaper(newspaperId));
 		res.addObject("customerLogged", customerLogged);
 		res.addObject("needPay", needPay);
+		res.addObject("free", free);
 		res.addObject("somethingLogged", somethingLogged);
 		res.addObject("requestURI", "newspaper/display.do?newspaperId=" + newspaperId);
 		return res;

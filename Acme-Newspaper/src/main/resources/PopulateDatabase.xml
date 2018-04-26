@@ -1139,7 +1139,7 @@
 		</property>	
 	</bean>
 	<bean id="Volume4" class="domain.Volume">
-		<property name="title" value="volume1" />
+		<property name="title" value="volume4" />
 		<property name="description" value="voldesc4" />
 		<property name="year" value="2018" />
 		<property name="price" value="0.0" />

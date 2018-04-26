@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CustomerService;
 import services.NewspaperService;
 import services.SubscriptionService;
 import services.VolumeService;
@@ -42,6 +43,8 @@ public class SubscriptionCustomerController extends AbstractController {
 
 	@Autowired
 	VolumeService		volumeService;
+	@Autowired
+	CustomerService		customerService;
 
 
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
@@ -88,6 +91,7 @@ public class SubscriptionCustomerController extends AbstractController {
 		final SubscriptionForm s = new SubscriptionForm();
 		final Volume v = this.volumeService.findOne(volumeId);
 		Assert.notNull(v);
+		Assert.isTrue(!v.getCustomers().contains(this.customerService.findByPrincipal()));
 		s.setVolume(v);
 		result = new ModelAndView("subscription/subscribevolume");
 		result.addObject("subscriptionForm", s);
@@ -106,6 +110,7 @@ public class SubscriptionCustomerController extends AbstractController {
 			res.addObject("message", "subscription.invalidcc");
 		} else
 			try {
+				Assert.isTrue(!s.getVolume().getCustomers().contains(this.customerService.findByPrincipal()));
 				this.subscriptionService.subscribeVolume(s);
 				res = new ModelAndView("redirect:/volume/display.do?volumeId=" + s.getVolume().getId());
 			} catch (final Throwable oops) {

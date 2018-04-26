@@ -40,7 +40,8 @@ public class ArticleUserController extends AbstractController {
 	public ModelAndView display(@RequestParam final int articleId) {
 		ModelAndView res;
 		final Article article = this.articleService.findOne(articleId);
-		Assert.isTrue(article.getNewspaper().isFree() || article.getCreator().getId() == this.userService.findByPrincipal().getId());
+		Assert.isTrue(article.getNewspaper().isFree() || article.getCreator().getId() == this.userService.findByPrincipal().getId()|| article.getNewspaper().getCreator().getId()== this.userService.findByPrincipal().getId());
+		Assert.isTrue(article.getMoment()!=null|| article.getCreator().getId() == this.userService.findByPrincipal().getId()|| article.getNewspaper().getCreator().getId()== this.userService.findByPrincipal().getId());
 		final String requestURI = "article/user/display.do";
 		final List<String> pictures = new ArrayList<String>(article.getPictureUrls());
 		final boolean hasPictures = !pictures.isEmpty();

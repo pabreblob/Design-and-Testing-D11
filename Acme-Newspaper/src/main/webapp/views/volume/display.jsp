@@ -63,8 +63,9 @@
 	</display:column>
 	
 </display:table>
-
+<jstl:if test="${sub==false}">
 	<p><a href="subscription/customer/subscribeVolume.do?volumeId=${volume.id}"> <spring:message
 					code="volume.subscribe" />
 			</a> </p>
+			</jstl:if>
 

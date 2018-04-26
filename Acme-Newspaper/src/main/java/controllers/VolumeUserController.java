@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.NewspaperService;
 import services.UserService;
 import services.VolumeService;
+import domain.Article;
 import domain.Newspaper;
 import domain.User;
 import domain.Volume;
@@ -92,7 +93,16 @@ public class VolumeUserController extends AbstractController {
 
 		return res;
 	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int volumeId) {
+		ModelAndView res;
+		Volume v;
+		v = this.volumeService.findOne(volumeId);
+		Assert.isTrue(v.getCreator().getId() == this.userService.findByPrincipal().getId());
+		res = this.createEditModelAndView(v);
 
+		return res;
+	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final Volume v, final BindingResult binding) {
 		ModelAndView res;

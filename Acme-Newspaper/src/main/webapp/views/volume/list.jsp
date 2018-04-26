@@ -22,9 +22,14 @@
 	pagesize="5" class="displaytag">
 	<jstl:if test="${requestURI == 'volume/user/list-created.do' }">
 		<display:column>
-	<%--url provisional --%>
-			<a href="newspaper/user/list-available.do?volumeId=${v.id}"> <spring:message
+			<a href="volume/user/edit.do?volumeId=${v.id}"> <spring:message
 					code="volume.edit" />
+			</a>
+
+		</display:column>
+		<display:column>
+			<a href="newspaper/user/list-available.do?volumeId=${v.id}"> <spring:message
+					code="volume.newspaper.add" />
 			</a>
 
 		</display:column>
@@ -48,7 +53,7 @@
 			</jstl:forEach>
 			<jstl:if test="${not contains}">
 
-			<a href="volume/customer/subscribe.do?volumeId=${v.id}"> <spring:message
+			<a href="subscription/customer/subscribeVolume.do?volumeId=${v.id}"> <spring:message
 					code="volume.subscribe" />
 			</a>
 		</jstl:if>
@@ -63,7 +68,7 @@
 	</security:authorize>
 	<security:authorize access="hasRole('CUSTOMER')">
 	<display:column>
-	<a href="volume/display.do?volumeId=${v.id}"> <spring:message
+	<a href="volume/customer/display.do?volumeId=${v.id}"> <spring:message
 					code="volume.display" />
 	</a>
 	</display:column>

@@ -10,6 +10,8 @@
 
 package controllers;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,10 @@ public class SubscriptionCustomerController extends AbstractController {
 		if (binding.hasErrors()) {
 			res = new ModelAndView("subscription/edit");
 			res.addObject("subscription", s);
+		} else if (SubscriptionCustomerController.checkDate(s.getCreditCard().getExpMonth(), s.getCreditCard().getExpYear()) == false) {
+			res = new ModelAndView("subscription/edit");
+			res.addObject("subscription", s);
+			res.addObject("message", "subscription.invalidcc");
 		} else
 			try {
 				this.subscriptionService.save(s);
@@ -73,9 +79,9 @@ public class SubscriptionCustomerController extends AbstractController {
 				res.addObject("subscription", s);
 				res.addObject("message", "newspaper.commit.error");
 			}
+
 		return res;
 	}
-
 	@RequestMapping(value = "/subscribeVolume", method = RequestMethod.GET)
 	public ModelAndView subscribeVolume(final int volumeId) {
 		ModelAndView result;
@@ -94,6 +100,10 @@ public class SubscriptionCustomerController extends AbstractController {
 		if (binding.hasErrors()) {
 			res = new ModelAndView("subscription/subscribevolume");
 			res.addObject("subscriptionForm", s);
+		} else if (SubscriptionCustomerController.checkDate(s.getCreditCard().getExpMonth(), s.getCreditCard().getExpYear()) == false) {
+			res = new ModelAndView("subscription/subscribevolume");
+			res.addObject("subscriptionForm", s);
+			res.addObject("message", "subscription.invalidcc");
 		} else
 			try {
 				this.subscriptionService.subscribeVolume(s);
@@ -103,6 +113,17 @@ public class SubscriptionCustomerController extends AbstractController {
 				res.addObject("subscriptionForm", s);
 				res.addObject("message", "newspaper.commit.error");
 			}
+
+		return res;
+	}
+
+	private static boolean checkDate(final int month, final int year) {
+		boolean res = false;
+		final Date now = new Date();
+		if (now.getYear() - 100 < year)
+			res = true;
+		if (now.getYear() - 100 == year && now.getMonth() + 1 <= month)
+			res = true;
 
 		return res;
 	}

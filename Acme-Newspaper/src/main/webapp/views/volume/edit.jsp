@@ -25,7 +25,6 @@
 	<acme:textbox code="volume.title" path="title" /><br />
 	<acme:textarea code="volume.description" path="description" /><br />
 	<acme:textbox code="volume.year" path="year" /><br />
-	<acme:textbox code="volume.price" path="price" /><br />
 	<acme:submit name="save" code="volume.save"  />
 	<acme:cancel code="volume.cancel" url="/volume/user/list-created.do" /><br />	
 </form:form>

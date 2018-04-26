@@ -45,13 +45,13 @@ public class VolumeController extends AbstractController {
 		return res;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView searchList(final HttpServletRequest request) {
+	public ModelAndView list(final HttpServletRequest request) {
 		ModelAndView res;
 		
 		final Collection<Volume> volumes = this.volumeService.findAll();
 		res = new ModelAndView("volume/list");
 		res.addObject("volumes", volumes);
-		res.addObject("requestURI", "volume/list");
+		res.addObject("requestURI", "volume/list.do");
 		return res;
 	}
 

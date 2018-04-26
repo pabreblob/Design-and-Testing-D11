@@ -72,7 +72,7 @@ public class VolumeUserController extends AbstractController {
 		Volume volume=this.volumeService.findOne(volumeId);
 		Newspaper newspaper=this.newspaperService.findOne(newspaperId);
 		this.volumeService.addNewspaper(volume, newspaper);
-		res = new ModelAndView("redirect:list-created.do");
+		res = new ModelAndView("redirect:/newspaper/user/list-available.do?volumeId="+volumeId);
 		//debe dirigir a la lista de newspapers disponibles a añadir
 		return res;
 	}

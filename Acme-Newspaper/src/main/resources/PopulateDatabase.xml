@@ -1083,7 +1083,7 @@
 		<property name="title" value="volume1" />
 		<property name="description" value="voldesc1" />
 		<property name="year" value="2018" />
-		<property name="price" value="40.0" />
+		<property name="price" value="0.0" />
 		<property name="creator" ><ref bean="User1"></ref></property>
 		<property name="customers">
 		<list>

@@ -96,10 +96,8 @@ public class SubscriptionCustomerController extends AbstractController {
 			res.addObject("subscriptionForm", s);
 		} else
 			try {
-
-				System.out.println(s.getCreditCard());
-				res = null;
-				//res = new ModelAndView("redirect:/volume/display.do?volumeId=" + s.getNewspaper().getId());
+				this.subscriptionService.subscribeVolume(s);
+				res = new ModelAndView("redirect:/volume/display.do?volumeId=" + s.getVolume().getId());
 			} catch (final Throwable oops) {
 				res = new ModelAndView("newspaper/subscribevolume");
 				res.addObject("subscriptionForm", s);

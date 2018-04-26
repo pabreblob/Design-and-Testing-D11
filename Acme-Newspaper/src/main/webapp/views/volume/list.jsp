@@ -18,7 +18,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<display:table name="volumes" id="v" requestURI="${requestURI}"
+<display:table name="volumes" id="v" requestURI="${requestURI}" keepStatus="true"
 	pagesize="5" class="displaytag">
 	<jstl:if test="${requestURI == 'volume/user/list-created.do' }">
 		<display:column>

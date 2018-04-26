@@ -63,3 +63,8 @@
 	</display:column>
 	
 </display:table>
+
+	<p><a href="subscription/customer/subscribeVolume.do?volumeId=${volume.id}"> <spring:message
+					code="volume.subscribe" />
+			</a> </p>
+

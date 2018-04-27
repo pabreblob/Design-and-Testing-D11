@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TabooWordRepository;
+import domain.Advertisement;
 import domain.Article;
 import domain.Chirp;
 import domain.FollowUp;
+import domain.Newspaper;
 import domain.TabooWord;
 
 @Service
@@ -19,19 +21,20 @@ import domain.TabooWord;
 public class TabooWordService {
 
 	@Autowired
-	private TabooWordRepository	tabooWordRepository;
+	private TabooWordRepository		tabooWordRepository;
 	@Autowired
-	private AdminService		adminService;
+	private AdminService			adminService;
 	@Autowired
-	private ArticleService		articleService;
+	private ArticleService			articleService;
 	@Autowired
-	private FollowUpService		followupService;
+	private FollowUpService			followupService;
 	@Autowired
-	private ChirpService		chirpService;
+	private ChirpService			chirpService;
+	@Autowired
+	private AdvertisementService	advertisementService;
+	@Autowired
+	private NewspaperService		newspaperService;
 
-
-	//	@Autowired
-	//	private NewspaperService	newspaperService;
 
 	public TabooWordService() {
 		super();
@@ -83,7 +86,8 @@ public class TabooWordService {
 		final Collection<Article> arts = this.articleService.findAll();
 		final Collection<Chirp> chirps = this.chirpService.findAll();
 		final Collection<FollowUp> folls = this.followupService.findAll();
-		//final Collection<Newspaper> newsps = this.newspaperService.findAll();
+		final Collection<Newspaper> newsps = this.newspaperService.findAll();
+		final Collection<Advertisement> advs = this.advertisementService.findAll();
 
 		for (final Article a : arts)
 			a.setMarked(a.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
@@ -94,19 +98,20 @@ public class TabooWordService {
 		for (final FollowUp f : folls)
 			f.setMarked(f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getTitle().contains(tw.getWord()));
 
-		//		for(Newspaper n: newsps){
-		//			n.setMarked(n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || 
-		//										n.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
-		//		}
-	}
+		for (final Newspaper n : newsps)
+			n.setMarked(n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
+		for (final Advertisement a : advs)
+			a.setMarked(a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+	}
 	protected void updateWords() {
 		final Collection<TabooWord> all = this.findAll();
 
 		final Collection<Article> arts = this.articleService.findAll();
 		final Collection<Chirp> chirps = this.chirpService.findAll();
 		final Collection<FollowUp> folls = this.followupService.findAll();
-		//final Collection<Newspaper> newsps = this.newspaperService.findAll();
+		final Collection<Newspaper> newsps = this.newspaperService.findAll();
+		final Collection<Advertisement> advs = this.advertisementService.findAll();
 
 		for (final Article a : arts)
 			for (final TabooWord tw : all)
@@ -120,9 +125,12 @@ public class TabooWordService {
 			for (final TabooWord tw : all)
 				f.setMarked(f.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
-		//		for (Newspaper n: newsps)
-		//			for (TabooWord tw: all)
-		//				n.setMarked(n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().matches(".*\\b" + tw.getWord() + "\\b.*"));
+		for (final Newspaper n : newsps)
+			for (final TabooWord tw : all)
+				n.setMarked(n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
+		for (final Advertisement a : advs)
+			for (final TabooWord tw : all)
+				a.setMarked(a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 	}
 }

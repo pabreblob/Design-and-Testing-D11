@@ -106,7 +106,7 @@
 					<li><a href="article/admin/list-marked.do"><spring:message code="master.page.admin.article.marked" /></a></li>
 					<li><a href="followUp/admin/list-marked.do"><spring:message code="master.page.admin.followup.marked" /></a></li>
 					<li><a href="chirp/admin/list-marked.do"><spring:message code="master.page.admin.chirp.marked" /></a></li>
-					<li><a href="volume/admin/list-marked.do"><spring:message code="master.page.admin.volume.marked" /></a></li>
+					<li><a href="advertisement/admin/list-marked.do"><spring:message code="master.page.admin.advertisement.marked" /></a></li>
 					<li><a href="tabooword/admin/list.do"><spring:message code="master.page.admin.tabooword.list" /></a></li>
 				</ul>
 			</li>

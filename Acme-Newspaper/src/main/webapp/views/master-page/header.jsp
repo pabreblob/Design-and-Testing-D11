@@ -119,6 +119,7 @@
 					<li><a href="article/admin/list.do"><spring:message code="master.page.admin.article.list" /></a></li>
 					<li><a href="followUp/admin/list-all.do"><spring:message code="master.page.admin.followup.list"/></a></li>
 					<li><a href="chirp/admin/list.do"><spring:message code="master.page.admin.chirp.list" /></a></li>
+					<li><a href="advertisement/admin/list.do"><spring:message code="master.page.admin.advertisement.list" /></a></li>
 					<li><a href="volume/admin/list.do"><spring:message code="master.page.admin.volume.list"/></a></li>
 				</ul>
 			</li>

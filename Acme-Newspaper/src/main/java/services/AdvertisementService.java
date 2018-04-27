@@ -29,6 +29,8 @@ public class AdvertisementService {
 	@Autowired
 	private TabooWordService		tabooWordService;
 	@Autowired
+	private NewspaperService		newspaperService;
+	@Autowired
 	private Validator				validator;
 
 
@@ -37,8 +39,11 @@ public class AdvertisementService {
 	}
 
 	public Advertisement create(final Newspaper n) {
+		Assert.isTrue(this.newspaperService.findPublicatedNewspaper().contains(n));
 		final Agent owner = this.agentService.findByPrincipal();
 		Assert.notNull(owner);
+		for (final Advertisement a : this.findAdvertisementByNewspaperId(n.getId()))
+			Assert.isTrue(!a.getOwner().equals(owner));
 		final Advertisement res = new Advertisement();
 		res.setNewspaper(n);
 
@@ -48,8 +53,12 @@ public class AdvertisementService {
 	public Advertisement save(final Advertisement adv) {
 		Assert.notNull(adv);
 		Assert.isTrue(adv.getId() == 0);
+		final Newspaper n = adv.getNewspaper();
+		Assert.isTrue(this.newspaperService.findPublicatedNewspaper().contains(n));
 		final Agent owner = this.agentService.findByPrincipal();
 		Assert.isTrue(adv.getOwner().equals(owner));
+		for (final Advertisement a : this.findAdvertisementByNewspaperId(n.getId()))
+			Assert.isTrue(!a.getOwner().equals(owner));
 
 		final Collection<TabooWord> tw = this.tabooWordService.findAll();
 		boolean taboow = false;

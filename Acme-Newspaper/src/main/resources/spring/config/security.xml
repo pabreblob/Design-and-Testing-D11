@@ -83,6 +83,9 @@
 		<security:intercept-url pattern="/volume/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/volume/customer/**" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/volume/**" access="permitAll" />
+		
+		<security:intercept-url pattern="/advertisement/agent/**" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/advertisement/admin/**" access="hasRole('ADMIN')" />
 
 		
 		<security:intercept-url pattern="/subscription/customer/**" access="hasRole('CUSTOMER')" />

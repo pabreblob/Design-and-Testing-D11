@@ -8,6 +8,9 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jstl:if test="${name != null}">
+	<h1><jstl:out value="${name}"/></h1>
+</jstl:if>
 <jstl:if test="${main == false}">
 	<jstl:if test="${back != null}">
 		<a href="folder/actor/list.do?parentId=${back}"><spring:message code="folder.goBack"/></a><br>
@@ -16,9 +19,7 @@
 		<a href="folder/actor/list.do"><spring:message code="folder.goBack"/></a><br>
 	</jstl:if>
 </jstl:if>
-
 <a><spring:message code="folder.sendMessage"/></a><br>
-
 <display:table name="folders" id="row" requestURI="folder/actor/list.do" pagesize="10" class="displaytag">
 	<spring:message code="folder.name" var="name"/>
 	<display:column property="name" title="${name}" />

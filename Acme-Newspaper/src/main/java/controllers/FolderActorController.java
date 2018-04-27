@@ -31,6 +31,7 @@ public class FolderActorController extends AbstractController {
 	public ModelAndView list(@RequestParam(required = false) final Integer parentId) {
 		final ModelAndView res = new ModelAndView("folder/list");
 		if (parentId == null) {
+			res.addObject("name", null);
 			res.addObject("folders", this.folderService.mainFolders());
 			res.addObject("back", null);
 			res.addObject("main", true);
@@ -45,6 +46,7 @@ public class FolderActorController extends AbstractController {
 			else
 				res.addObject("back", parent.getParent().getId());
 			res.addObject("main", false);
+			res.addObject("name", parent.getName());
 			res.addObject("parent", parentId);
 		}
 		return res;

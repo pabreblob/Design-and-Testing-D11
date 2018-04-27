@@ -51,6 +51,7 @@ $(document).ready(function() {
 function acceptCookies() {
 	document.cookie = "accepted=true; path=/";
 	document.getElementById("pruebacookie").innerHTML = "";
+	$("#pruebacookie").css("visibility", "hidden");
 }
 
 function getCookie(cname) {

@@ -159,11 +159,30 @@ public class FolderService {
 			res.setMessages(messages);
 			res.setParent(null);
 		} else {
-			res = this.folderRepository.findOne(folder.getId());
+			final Folder f = this.findOne(folder.getId());
+			res = this.create();
+			res.setChildren(f.getChildren());
+			res.setId(f.getId());
+			res.setVersion(f.getVersion());
+			res.setMessages(f.getMessages());
+			res.setParent(f.getParent());
 			res.setName(folder.getName());
 		}
 		this.validator.validate(res, br);
 		return res;
+	}
+	public Folder saveRename(final Folder f) {
+		final Folder old = this.findOne(f.getId());
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(old));
+		Assert.isNull(this.findFolderByNameAndActor(f.getName()));
+		Assert.isTrue(!f.getName().equals("In box"));
+		Assert.isTrue(!f.getName().equals("Out box"));
+		Assert.isTrue(!f.getName().equals("Spam box"));
+		Assert.isTrue(!f.getName().equals("Trash box"));
+		Assert.isTrue(!f.getName().equals("Notification box"));
+		Assert.isTrue(f.getName().replace(" ", "").length() != 0);
+
+		return this.folderRepository.save(f);
 	}
 	public Collection<Folder> findFolderByPrincipal() {
 		final Actor a = this.actorService.findByPrincipal();

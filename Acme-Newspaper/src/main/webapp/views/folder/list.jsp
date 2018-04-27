@@ -54,15 +54,6 @@
 		</jstl:if>
 	</display:column>
 	
-	<spring:message code="folder.delete" var="delete"/>
-	<display:column title="${delete}">
-		<jstl:if test="${row.name != 'In box' and row.name != 'Out box' and row.name != 'Notification box' and row.name != 'Trash box' and row.name != 'Spam box'}">
-			<jstl:if test="${row.children.size() == 0}">
-				<a href="folder/actor/delete.do?folderId=${row.id}"><spring:message code="folder.delete"/></a>
-			</jstl:if>
-		</jstl:if>
-	</display:column>
-	
 </display:table>
 
 <div id="buttonFolder">

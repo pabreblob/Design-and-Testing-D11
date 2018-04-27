@@ -9,13 +9,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<jstl:if test="${folder.parent != null}">
-	<a href="folder/actor/list.do?parentId=${back}"><spring:message code="folder.goBack"/></a><br>
-</jstl:if>
-<jstl:if test="${folder.parent == null}">
-	<a href="folder/actor/list.do"><spring:message code="folder.goBack"/></a><br>
-</jstl:if>
-
 <form:form action="folder/actor/saveEdit.do" modelAttribute="folder">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
@@ -29,6 +22,6 @@
 		<acme:cancel url="folder/actor/list.do" code="folder.cancel"/>
 	</jstl:if>
 	<jstl:if test="${folder.parent.id != 0}">
-		<acme:cancel url="folder/actor/list.do?folderId=${folder.parent.id}" code="folder.cancel"/>
+		<acme:cancel url="folder/actor/list.do?parentId=${folder.parent.id}" code="folder.cancel"/>
 	</jstl:if>
 </form:form>

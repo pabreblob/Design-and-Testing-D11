@@ -1133,7 +1133,6 @@
 		</property>
 		<property name="newspapers">
 		<list>
-		<ref bean="Newspaper2" />
 		<ref bean="Newspaper8" />
 		</list>	
 		</property>	
@@ -1199,7 +1198,7 @@
 		<property name="description" value="voldesc7" />
 		<property name="year" value="2018" />
 		<property name="price" value="0.0" />
-		<property name="creator" ><ref bean="User2"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
 		<property name="customers">
 		<list>
 		<ref bean="Customer1" />

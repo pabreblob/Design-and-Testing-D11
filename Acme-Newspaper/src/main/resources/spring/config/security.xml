@@ -51,6 +51,7 @@
 		
 		<security:intercept-url pattern="/customer/create.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/customer/save.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/agent/**" access="permitAll" />
 
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 

@@ -82,7 +82,7 @@ public class AgentService {
 
 		final List<Authority> authorities = new ArrayList<Authority>();
 		final Authority auth = new Authority();
-		auth.setAuthority(Authority.USER);
+		auth.setAuthority(Authority.AGENT);
 		authorities.add(auth);
 		agent.getUserAccount().setAuthorities(authorities);
 		final UserAccount ua = this.userAccountService.save(agent.getUserAccount());

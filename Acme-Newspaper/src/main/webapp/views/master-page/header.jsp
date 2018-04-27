@@ -29,22 +29,16 @@
 			<ul>
 				<li class="arrow"></li>
 				
-				<security:authorize access="isAnonymous()">
-					<!-- Acciones para todos los usuarios -->
+				<security:authorize access="!hasRole('ADMIN') and !hasRole('AGENT')">
+					<!-- Acciones para todos los usuarios menos Admin -->
 					<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
 				</security:authorize>
 
 				
 				<security:authorize access="hasRole('USER')">
 				<!-- Acciones para los Users -->
-					<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
 					<li><a href="newspaper/user/list.do"><spring:message code="master.page.user.newspaper.created" /></a></li>
 					<li><a href="newspaper/user/create.do"><spring:message code="master.page.user.newspaper.create" /></a></li>
-				</security:authorize>
-			
-				<security:authorize access="hasRole('CUSTOMER')">
-				<!-- Acciones para los Customer -->
-					<li><a href="newspaper/list.do"><spring:message code="master.page.newspaper.list" /></a></li>
 				</security:authorize>
 				
 				<security:authorize access="hasRole('AGENT')">
@@ -76,6 +70,7 @@
 			</ul>
 		</li>
 		
+		<security:authorize access="!hasRole('ADMIN')">
 		<!-- Acciones de Volume -->
 		<li><a class="fNiv"><spring:message code="master.page.volume" /></a>
 			<ul>
@@ -99,6 +94,7 @@
 		
 			</ul>
 		</li>
+		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">
 		<!-- Acciones para Admins -->
@@ -147,6 +143,7 @@
 					<li><a href="security/login.do"><spring:message code="master.page.login" /></a></li>
 					<li><a href="user/create.do"><spring:message code="master.page.user.register" /></a></li>
 					<li><a href="customer/create.do"><spring:message code="master.page.customer.register" /></a></li>
+					<li><a href="agent/create.do"><spring:message code="master.page.agent.register" /></a></li>
 				</ul>
 			</li>
 			

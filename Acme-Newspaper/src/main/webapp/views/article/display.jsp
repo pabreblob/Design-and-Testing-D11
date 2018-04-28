@@ -8,6 +8,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<div>
+<jstl:if test="${advertisementSize>0}">
+<img src="${bannerUrl}" alt=<spring:message code="article.advertisementBanner"/>/>
+</jstl:if>
+</div>
 
 
 <div>

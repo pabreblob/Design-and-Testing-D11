@@ -1066,7 +1066,7 @@
 	</bean>
 	<bean id="Advertisement7" class="domain.Advertisement">
 		<property name="title" value="advertisement7" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="https://2static2.fjcdn.com/thumbnails/comments/Thekarts+used+roll+picturethekarts+rolled+image+sweet+jesus+_a17399b5c8103dd30b64ad5f7f637e74.png" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent2" />

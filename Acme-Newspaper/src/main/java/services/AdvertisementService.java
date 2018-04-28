@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,5 +112,11 @@ public class AdvertisementService {
 		this.validator.validate(res, binding);
 		return res;
 	}
+	public String getRandomAdvertisementImage(final int newspaperId) {
+		final Advertisement advertisement = new ArrayList<Advertisement>(this.advertisementRepository.getRandomAdvertisement(newspaperId)).get(0);
+		final String res = advertisement.getBannerUrl();
+		return res;
+	}
+
 
 }

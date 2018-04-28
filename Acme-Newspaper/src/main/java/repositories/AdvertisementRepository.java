@@ -20,5 +20,8 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, In
 
 	@Query("select a from Advertisement a where a.marked = true")
 	Collection<Advertisement> findMarked();
+	@Query("select a from Advertisement a where a.newspaper.id = ?1 order by rand()")
+	Collection<Advertisement> getRandomAdvertisement(int newspaperId);
+
 
 }

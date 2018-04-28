@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdvertisementService;
 import services.ArticleService;
 import services.FollowUpService;
+import domain.Advertisement;
 import domain.Article;
 
 @Controller
@@ -27,6 +29,8 @@ public class ArticleController extends AbstractController {
 	ArticleService	articleService;
 	@Autowired
 	FollowUpService	followUpService;
+	@Autowired
+	AdvertisementService	advertisementService;
 
 
 	//	Displaying
@@ -40,8 +44,13 @@ public class ArticleController extends AbstractController {
 		final List<String> pictures = new ArrayList<String>(article.getPictureUrls());
 		final boolean hasPictures = !pictures.isEmpty();
 		final boolean hasFollowUps = !this.followUpService.findFollowUpsByArticle(articleId).isEmpty();
+		String bannerUrl=this.advertisementService.getRandomAdvertisementImage(article.getNewspaper().getId());
+		List<Advertisement> advs=new ArrayList<Advertisement>(this.advertisementService.findAdvertisementByNewspaperId(article.getNewspaper().getId()));
+		int advertisementSize=advs.size();
 
 		res = new ModelAndView("article/display");
+		res.addObject("bannerUrl", bannerUrl);
+		res.addObject("advertisementSize", advertisementSize);
 		res.addObject("article", article);
 		res.addObject("hasFollowUps", hasFollowUps);
 		res.addObject("pictures", pictures);

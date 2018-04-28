@@ -13,13 +13,13 @@
 </jstl:if>
 <jstl:if test="${main == false}">
 	<jstl:if test="${back != null}">
-		<a href="folder/actor/list.do?parentId=${back}"><spring:message code="folder.goBack"/></a><br>
+		<h3><a href="folder/actor/list.do?parentId=${back}"><spring:message code="folder.goBack"/></a></h3>
 	</jstl:if>
 	<jstl:if test="${back == null}">
-		<a href="folder/actor/list.do"><spring:message code="folder.goBack"/></a><br>
+		<h3><a href="folder/actor/list.do"><spring:message code="folder.goBack"/></a></h3>
 	</jstl:if>
 </jstl:if>
-<a><spring:message code="folder.sendMessage"/></a><br>
+<h3><a href="message/actor/create.do"><spring:message code="folder.sendMessage"/></a></h3>
 <display:table name="folders" id="row" requestURI="folder/actor/list.do" pagesize="10" class="displaytag">
 	<spring:message code="folder.name" var="name"/>
 	<display:column property="name" title="${name}" />

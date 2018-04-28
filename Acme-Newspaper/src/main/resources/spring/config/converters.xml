@@ -40,6 +40,8 @@
 		<bean class="converters.StringToChirpConverter" />
 		<bean class="converters.TabooWordToStringConverter"/>
 		<bean class="converters.StringToTabooWordConverter" />
+		<bean class="converters.MessageToStringConverter"/>
+		<bean class="converters.StringToMessageConverter" />
 		
 		<bean class="converters.StringToNewspaperConverter" />
 		<bean class="converters.NewspaperToStringConverter" />

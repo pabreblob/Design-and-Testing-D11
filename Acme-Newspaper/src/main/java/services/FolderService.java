@@ -3,6 +3,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import repositories.FolderRepository;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import forms.FolderMoveForm;
 
 @Service
 @Transactional
@@ -184,6 +187,38 @@ public class FolderService {
 
 		return this.folderRepository.save(f);
 	}
+	public void changeParent(final Folder toMove, final Folder newParent) {
+		Assert.notNull(toMove);
+		if (newParent != null)
+			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(newParent));
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(toMove));
+		Assert.isTrue(!toMove.getName().equals("In box"));
+		Assert.isTrue(!toMove.getName().equals("Out box"));
+		Assert.isTrue(!toMove.getName().equals("Spam box"));
+		Assert.isTrue(!toMove.getName().equals("Trash box"));
+		Assert.isTrue(!toMove.getName().equals("Notification box"));
+		if (newParent != null)
+			Assert.isTrue(!this.checkIfIsChild(toMove, newParent));
+		if (toMove.getParent() != null)
+			toMove.getParent().getChildren().remove(toMove);
+		if (newParent == null)
+			toMove.setParent(null);
+		else {
+			toMove.setParent(newParent);
+			newParent.getChildren().add(toMove);
+		}
+	}
+	private boolean checkIfIsChild(final Folder toMove, final Folder newParent) {
+		Boolean res = false;
+		Folder checking = newParent;
+		while (checking.getParent() != null)
+			if (checking.getParent().getId() == toMove.getId()) {
+				res = true;
+				break;
+			} else
+				checking = checking.getParent();
+		return res;
+	}
 	public Collection<Folder> findFolderByPrincipal() {
 		final Actor a = this.actorService.findByPrincipal();
 		return a.getFolders();
@@ -196,5 +231,47 @@ public class FolderService {
 	}
 	public Collection<Folder> mainFolders() {
 		return this.folderRepository.mainFolders(this.actorService.findByPrincipal().getId());
+	}
+	public Collection<Folder> findAll() {
+		return this.folderRepository.findAll();
+	}
+	public Collection<Folder> allFoldersFromFolder(final Folder f) {
+		final Collection<Folder> toStart = new ArrayList<Folder>();
+		toStart.add(f);
+		final Set<Folder> res = new HashSet<>();
+		this.allFoldersFromFolder(res, toStart);
+		return res;
+	}
+	private Set<Folder> allFoldersFromFolder(final Set<Folder> res, final Collection<Folder> folders) {
+		for (final Folder f : folders)
+			if (f.getChildren().isEmpty())
+				res.add(f);
+			else {
+				this.allFoldersFromFolder(res, f.getChildren());
+				res.add(f);
+			}
+		return res;
+	}
+	public Folder reconstructNewParent(final FolderMoveForm fmf) {
+		final Integer newParent = fmf.getIdNewParent();
+		if (newParent == 0)
+			return null;
+		else {
+			final Folder parent = this.findOne(newParent);
+			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
+			return parent;
+		}
+	}
+	public Folder recontructToMove(final FolderMoveForm fmf) {
+		final Integer toMoveId = fmf.getFolderToMove();
+		Assert.isTrue(toMoveId != 0);
+		final Folder f = this.findOne(toMoveId);
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(f));
+		Assert.isTrue(!f.getName().equals("In box"));
+		Assert.isTrue(!f.getName().equals("Out box"));
+		Assert.isTrue(!f.getName().equals("Spam box"));
+		Assert.isTrue(!f.getName().equals("Trash box"));
+		Assert.isTrue(!f.getName().equals("Notification box"));
+		return f;
 	}
 }

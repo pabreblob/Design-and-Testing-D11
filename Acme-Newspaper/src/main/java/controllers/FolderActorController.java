@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.FolderService;
 import domain.Folder;
+import forms.FolderMoveForm;
 
 @Controller
 @RequestMapping("/folder/actor")
@@ -141,6 +144,41 @@ public class FolderActorController extends AbstractController {
 				return this.editWithMessage(f.getId(), "folder.errorNameInUse");
 			else
 				return this.editWithMessage(f.getId(), "folder.cannotCommit");
+		}
+	}
+
+	@RequestMapping(value = "/move", method = RequestMethod.GET)
+	public ModelAndView move(final int folderId) {
+		final Folder toMove = this.folderService.findOne(folderId);
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(toMove));
+		Assert.notNull(toMove);
+		final ModelAndView m = new ModelAndView("folder/move");
+		m.addObject("toMove", toMove);
+
+		final FolderMoveForm fmf = new FolderMoveForm();
+		fmf.setFolderToMove(toMove.getId());
+		m.addObject("moveForm", fmf);
+
+		final Collection<Folder> toShow = this.actorService.findByPrincipal().getFolders();
+		toShow.removeAll(this.folderService.allFoldersFromFolder(toMove));
+		if (toMove.getParent() != null)
+			toShow.remove(toMove.getParent());
+		m.addObject("show", toShow);
+
+		return m;
+	}
+	@RequestMapping(value = "/moveSave", method = RequestMethod.POST)
+	public ModelAndView moveSave(final FolderMoveForm fmf) {
+		try {
+			final Folder toMove = this.folderService.recontructToMove(fmf);
+			final Folder newParent = this.folderService.reconstructNewParent(fmf);
+			this.folderService.changeParent(toMove, newParent);
+			if (newParent == null)
+				return this.list(null);
+			else
+				return this.list(newParent.getId());
+		} catch (final Throwable oops) {
+			return new ModelAndView("redirect: list.do");
 		}
 	}
 }

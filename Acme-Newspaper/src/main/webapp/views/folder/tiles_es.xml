@@ -26,4 +26,8 @@
 		<put-attribute name="body" value="/views/folder/edit.jsp" />
 	</definition>
 	
+	<definition name="folder/move" extends="master.page">	
+		<put-attribute name="title" value="Mover una carpeta" />
+		<put-attribute name="body" value="/views/folder/move.jsp" />
+	</definition>
 </tiles-definitions>

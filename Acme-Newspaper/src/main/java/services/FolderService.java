@@ -184,6 +184,11 @@ public class FolderService {
 		Assert.isTrue(!f.getName().equals("Spam box"));
 		Assert.isTrue(!f.getName().equals("Trash box"));
 		Assert.isTrue(!f.getName().equals("Notification box"));
+		Assert.isTrue(!old.getName().equals("In box"));
+		Assert.isTrue(!old.getName().equals("Out box"));
+		Assert.isTrue(!old.getName().equals("Spam box"));
+		Assert.isTrue(!old.getName().equals("Trash box"));
+		Assert.isTrue(!old.getName().equals("Notification box"));
 		Assert.isTrue(f.getName().replace(" ", "").length() != 0);
 
 		return this.folderRepository.save(f);

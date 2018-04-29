@@ -324,4 +324,37 @@ public class AdminService {
 		else
 			return ratioSum / creators.size();
 	}
+
+	public double ratioOfAdvertisedNewspaperVersusNotAdvertised() {
+		final Collection<Newspaper> adv = this.adminRepository.findAdvertisedNewspapers();
+		final Collection<Newspaper> notadv = this.newspaperService.findAll();
+		notadv.removeAll(adv);
+		Double res;
+
+		if (adv.size() == 0 || notadv.size() == 0)
+			res = 0.;
+		else
+			res = adv.size() * 1.0 / notadv.size();
+		return res;
+	}
+	public double ratioOfMarkedAdvertisments() {
+		Double res = this.adminRepository.ratioOfMarkedAdvertisments();
+		if (res == null)
+			res = 0.;
+		return res;
+	}
+
+	public double averageNewspapersPerVolume() {
+		Double res = this.adminRepository.averageNewspapersPerVolume();
+		if (res == null)
+			res = 0.;
+		return res;
+	}
+
+	public double ratioOfSubscriptionsToNewspaperVersusVolumes() {
+		Double res = this.adminRepository.ratioOfSubscriptionsToVolumesVersusNewspapers();
+		if (res == null)
+			res = 0.;
+		return res;
+	}
 }

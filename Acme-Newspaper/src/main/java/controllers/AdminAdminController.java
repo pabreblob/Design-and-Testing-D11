@@ -47,6 +47,11 @@ public class AdminAdminController extends AbstractController {
 		res.addObject("averageNumberOfArticlesPerPublicNewspaper", df.format(this.adminService.averageNumberOfArticlesPerPublicNewspaper()));
 		res.addObject("ratioOfSubscribersVersusAllCustomers", df.format(this.adminService.ratioOfSubscribersPerPrivateNewspaperVersusAllCustomers()));
 		res.addObject("averageRatioOfPrivateVersusPublicNewspapersPerPublisher", df.format(this.adminService.averageRatioOfPrivateVersusPublicNewspapersPerPublisher()));
+
+		res.addObject("ratioOfAdvertisedNewspaperVersusNotAdvertised", df.format(this.adminService.ratioOfAdvertisedNewspaperVersusNotAdvertised()));
+		res.addObject("ratioOfMarkedAdvertisments", df.format(this.adminService.ratioOfMarkedAdvertisments()));
+		res.addObject("averageNewspapersPerVolume", df.format(this.adminService.averageNewspapersPerVolume()));
+		res.addObject("ratioOfSubscriptionsToVolumesVersusNewspapers", df.format(this.adminService.ratioOfSubscriptionsToNewspaperVersusVolumes()));
 		return res;
 	}
 }

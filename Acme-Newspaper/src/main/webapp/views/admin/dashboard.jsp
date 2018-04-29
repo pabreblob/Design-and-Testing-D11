@@ -63,6 +63,12 @@
 <p><spring:message code="admin.ratioOfPublicNewspaperVersusPrivateNewspaper"/>: ${ratioOfPublicNewspaperVersusPrivateNewspaper}</p>
 <p><spring:message code="admin.ratioOfSubscribersPerPrivateNewspaperVersusTheTotalNumberOfCustomers"/>: ${ratioOfSubscribersVersusAllCustomers}</p>
 <p><spring:message code="admin.averageRatioOfPrivateVersusPublicNewspapersPerPublisher"/>: ${averageRatioOfPrivateVersusPublicNewspapersPerPublisher}</p>
+<p><spring:message code="admin.ratioOfAdvertisedNewspaperVersusNotAdvertised" />: ${ratioOfAdvertisedNewspaperVersusNotAdvertised}</p>
+<p><spring:message code="admin.ratioOfMarkedAdvertisments" />: ${ratioOfMarkedAdvertisments}</p>
+<p><spring:message code="admin.averageNewspapersPerVolume" />: ${averageNewspapersPerVolume}</p>
+<p><spring:message code="admin.ratioOfSubscriptionsToVolumesVersusNewspapers" />: ${ratioOfSubscriptionsToVolumesVersusNewspapers}</p>
+
+
 
 <h2><spring:message code="admin.newspaperWithTenMore"/></h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"

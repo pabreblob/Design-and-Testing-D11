@@ -24,6 +24,8 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Collection<User> listOfWriters();
 	@Query("select distinct n.creator from Newspaper n")
 	Collection<User> listOfUserWhoCreatedNewspaper();
+	//	@Query("select distinct a.newspaper from Advertisement a")
+	//	Collection<Newspaper> listOfAdvertisedNewspapers();
 	@Query("select a from Article a where a.creator.id = ?1")
 	Collection<Article> findArticlesPerUser(int userId);
 	@Query("select (select count(n) from Newspaper n where n.free = 1)*1.0/count(ne) from Newspaper ne where ne.free = 0 ")
@@ -40,5 +42,15 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Collection<Customer> findCustomerWhoAreSubscribed();
 	@Query("select (select count(n) from Newspaper n where n.free = 0 and n.creator.id = ?1)*1.0/count(ne) from Newspaper ne where ne.free = 1 and ne.creator.id = ?1")
 	Double ratioOfPrivateNewspaperVersusPublicNewspaper(int userId);
+
+	@Query("select distinct a.newspaper from Advertisement a")
+	Collection<Newspaper> findAdvertisedNewspapers();
+	@Query("select (select count(a) from Advertisement a where a.marked = 1)*1.0/count(ad) from Advertisement ad")
+	Double ratioOfMarkedAdvertisments();
+
+	@Query("select avg(v.newspapers.size) from Volume v")
+	Double averageNewspapersPerVolume();
+	@Query("select (select count(s) from Subscription s where s.volume = 1)*1.0/count(su) from Subscription su")
+	Double ratioOfSubscriptionsToVolumesVersusNewspapers();
 
 }

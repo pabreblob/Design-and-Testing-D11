@@ -145,6 +145,7 @@ public class NewspaperService {
 	//	return this.newspaperRepository.findNewspapersByVolumeId(volumeId);
 	//}
 
+	//------------------------------Acme Newspaper 2.0-------------------------
 	public Collection<Newspaper> findNewspapersWithAdvertisementByAgent() {
 		final Agent a = this.agentService.findByPrincipal();
 		Assert.notNull(a);
@@ -161,6 +162,7 @@ public class NewspaperService {
 	}
 	public Collection<Newspaper> findPublicatedNewspaperByPrincipal(final int volumeId) {
 		final User u = this.userService.findByPrincipal();
+		Assert.notNull(u);
 		final Collection<Newspaper> added = this.volumeService.findOne(volumeId).getNewspapers();
 		final Collection<Newspaper> res = this.newspaperRepository.findPublicatedNewspaperByUserId(u.getId());
 		res.removeAll(added);

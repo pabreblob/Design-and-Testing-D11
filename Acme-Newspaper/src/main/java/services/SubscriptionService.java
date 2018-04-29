@@ -37,6 +37,15 @@ public class SubscriptionService {
 	public Subscription save(final Subscription s) {
 		final Newspaper n = this.newspaperService.findOne(s.getNewspaper().getId());
 		Assert.isTrue(!n.isFree());
+		Assert.isTrue(n.getPublicationDate() != null);
+		Assert.isNull(this.getSubscriptionByNewspaperAndPrincipal(n.getId()));
+		final Subscription saved = this.subscriptionRepository.save(s);
+		return saved;
+	}
+
+	public Subscription save2(final Subscription s) {
+		final Newspaper n = this.newspaperService.findOne(s.getNewspaper().getId());
+		Assert.isTrue(!n.isFree());
 		//Assert.isTrue(n.getPublicationDate() != null);
 		Assert.isNull(this.getSubscriptionByNewspaperAndPrincipal(n.getId()));
 		final Subscription saved = this.subscriptionRepository.save(s);
@@ -51,6 +60,8 @@ public class SubscriptionService {
 		return this.subscriptionRepository.findAll();
 	}
 
+	//------------------------Acme Newspaper 2.0------------------------------
+
 	public void subscribeVolume(final SubscriptionForm s) {
 		Subscription sub;
 		for (final Newspaper n : s.getVolume().getNewspapers())
@@ -60,7 +71,7 @@ public class SubscriptionService {
 					sub.setNewspaper(n);
 					sub.setCreditCard(s.getCreditCard());
 					sub.setVolume(true);
-					this.save(sub);
+					this.save2(sub);
 				}
 		s.getVolume().getCustomers().add(this.customerService.findByPrincipal());
 	}

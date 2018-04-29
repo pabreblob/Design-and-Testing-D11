@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.junit.Test;
@@ -83,9 +84,9 @@ public class NewspaperServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * Template for testing the saving of services.
+	 * Template for testing the saving of newspapers.
 	 * <p>
-	 * This method defines the template used for the tests that check the saving of services.
+	 * This method defines the template used for the tests that check the saving of newspapers.
 	 * 
 	 * @param username
 	 *            The username of the user that logs in.
@@ -156,9 +157,9 @@ public class NewspaperServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * Template for testing the editing of services.
+	 * Template for testing the editing of newspapers.
 	 * <p>
-	 * This method defines the template used for the tests that check the editing of services.
+	 * This method defines the template used for the tests that check the editing of newspapers.
 	 * 
 	 * @param username
 	 *            The username of the user that logs in.
@@ -214,9 +215,9 @@ public class NewspaperServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * Template for testing the publication of services.
+	 * Template for testing the publication of newspapers.
 	 * <p>
-	 * This method defines the template used for the tests that check the publishing of services.
+	 * This method defines the template used for the tests that check the publishing of newspapers.
 	 * 
 	 * @param username
 	 *            The username of the user that logs in.
@@ -326,6 +327,341 @@ public class NewspaperServiceTest extends AbstractTest {
 		final Newspaper saved = this.newspaperService.save(n);
 		super.authenticate(null);
 		Assert.isTrue(this.newspaperService.findOne(saved.getId()).equals(saved));
+	}
+
+	/**
+	 * Tests the listing of newspapers created by principal.
+	 * <p>
+	 * This method tests the listing of the newspapers created by principal.
+	 * 
+	 * Not exist explicit requirements.
+	 * 
+	 * Case 1: List newspapers created by user 1. No exception is expected.
+	 * 
+	 * Case 2: List newspapers created by user 2. No exception is expected.
+	 * 
+	 * Case 3: List newspapers created by nothing. IllegalArgumentException is expected.
+	 */
+
+	@Test
+	public void driverNewspaperCreatedByPrincipal() {
+		final Object testingData[][] = {
+			{
+				"user1", 7, null
+			}, {
+				"user2", 1, null
+			}, {
+				null, 0, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateFindNewspaperCreatedByPrincipal((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * Template for testing the listing of newspapers.
+	 * <p>
+	 * This method defines the template used to test the listing of newspapers created by principal
+	 * 
+	 * @param username
+	 *            The username of the user that logs in.
+	 * @param minimumLength
+	 *            The minimum expected length of the list of rendezvouses that the user has created.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateFindNewspaperCreatedByPrincipal(final String username, final int minimumLength, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			super.authenticate(username);
+			final Collection<Newspaper> res = this.newspaperService.findNewspaperCreatedByPrincipal();
+			Assert.notNull(res);
+			Assert.isTrue(res.size() >= minimumLength);
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	/**
+	 * Tests the listing of newspapers created an user.
+	 * <p>
+	 * This method tests the listing of the newspapers created by an user.
+	 * 
+	 * Not exist explicit requirements.
+	 * 
+	 * Case 1: List newspapers created by user 1. No exception is expected.
+	 * 
+	 * Case 2: List newspapers created by user 2. No exception is expected.
+	 * 
+	 */
+	@Test
+	public void driverNewspaperCreatedByUserId() {
+		final Object testingData[][] = {
+			{
+				"User1", 7, null
+			}, {
+				"User2", 1, null
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateFindNewspaperCreatedByUserId(super.getEntityId((String) testingData[i][0]), (int) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * Template for testing the listing of newspapers.
+	 * <p>
+	 * This method defines the template used to test the listing of newspapers created by an user.
+	 * 
+	 * @param username
+	 *            The username of the user that we want to know his newspapers.
+	 * @param minimumLength
+	 *            The minimum expected length of the list of rendezvouses that the user has created.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateFindNewspaperCreatedByUserId(final int userId, final int minimumLength, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			Assert.notNull(this.userService.findOne(userId));
+			final Collection<Newspaper> res = this.newspaperService.findNewspaperCreatedByUserId(userId);
+			Assert.notNull(res);
+			Assert.isTrue(res.size() >= minimumLength);
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	/**
+	 * Tests the listing of newspapers searched.
+	 * <p>
+	 * This method tests the listing of the newspapers searched by a keyword
+	 * 
+	 * 4.5. Search for a published newspaper using a single keyword that must appear somewhere in its title or its description.
+	 * 
+	 * Case 1: List newspapers that contains "newspaper1"
+	 * 
+	 * Case 2: List newspapers that contains "newspaper"
+	 * 
+	 * Case 3: List newspapers that contains "this"
+	 * 
+	 */
+	@Test
+	public void driverNewspaperByKeyword() {
+		final Object testingData[][] = {
+			{
+				"newspaper1", 0, null
+			}, {
+				"newspaper", 7, null
+			}, {
+				"this", 6, null
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateFindNewspaperByKeyword((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * Template for testing the listing of newspapers.
+	 * <p>
+	 * This method defines the template used to test the listing of newspapers that contains a keyword
+	 * 
+	 * @param keyword
+	 *            The keyword to search newspapers.
+	 * @param minimumLength
+	 *            The minimum expected length of the list of rendezvouses that the user has created.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateFindNewspaperByKeyword(final String keyword, final int minimumLength, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			final Collection<Newspaper> res = this.newspaperService.findNewspapersByKeyword(keyword);
+			Assert.notNull(res);
+			Assert.isTrue(res.size() >= minimumLength);
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	/**
+	 * Tests the listing of newspapers in which an agent has placed an advertisement
+	 * <p>
+	 * This method tests the listing of the newspapers in which an agent has placed an advertisement
+	 * 
+	 * 4.3 List the newspapers in which they have placed an advertisement.
+	 * 
+	 * Case 1: List newspapers by agent 1. No exception is expected.
+	 * 
+	 * Case 2: List newspapers by agent 2. No exception is expected.
+	 * 
+	 * Case 3: List newspapers by nothing. IllegalArgumentException is expected.
+	 */
+
+	@Test
+	public void driverNewspaperWithAdvertisementByPrincipal() {
+		final Object testingData[][] = {
+			{
+				"agent1", 6, null
+			}, {
+				"agent2", 1, null
+			}, {
+				null, 0, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateFindNewspaperWithAdvertisementByPrincipal((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * Template for testing the listing of newspapers.
+	 * <p>
+	 * This method defines the template used to test the listing of newspapers with advertisements by principal
+	 * 
+	 * @param username
+	 *            The username of the user that logs in.
+	 * @param minimumLength
+	 *            The minimum expected length of the list of newspapers with advertisements.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateFindNewspaperWithAdvertisementByPrincipal(final String username, final int minimumLength, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			super.authenticate(username);
+			final Collection<Newspaper> res = this.newspaperService.findNewspapersWithAdvertisementByAgent();
+			Assert.notNull(res);
+			Assert.isTrue(res.size() >= minimumLength);
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	/**
+	 * Tests the listing of newspapers in which an agent has not placed an advertisement
+	 * <p>
+	 * This method tests the listing of the newspapers in which an agent has not placed an advertisement
+	 * 
+	 * 4.4 List the newspapers in which they have not placed any advertisements.
+	 * 
+	 * Case 1: List newspapers by agent 1. No exception is expected.
+	 * 
+	 * Case 2: List newspapers by agent 2. No exception is expected.
+	 * 
+	 * Case 3: List newspapers by nothing. IllegalArgumentException is expected.
+	 */
+
+	@Test
+	public void driverNewspaperWithoutAdvertisementByPrincipal() {
+		final Object testingData[][] = {
+			{
+				"agent1", 1, null
+			}, {
+				"agent2", 6, null
+			}, {
+				null, 0, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateFindNewspaperWithoutAdvertisementByPrincipal((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * Template for testing the listing of newspapers.
+	 * <p>
+	 * This method defines the template used to test the listing of newspapers without advertisements by principal
+	 * 
+	 * @param username
+	 *            The username of the user that logs in.
+	 * @param minimumLength
+	 *            The minimum expected length of the list of newspapers without any advertisements.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateFindNewspaperWithoutAdvertisementByPrincipal(final String username, final int minimumLength, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			super.authenticate(username);
+			final Collection<Newspaper> res = this.newspaperService.findNewspapersWithoutAdvertisementByAgent();
+			Assert.notNull(res);
+			Assert.isTrue(res.size() >= minimumLength);
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	/**
+	 * Tests the listing of newspapers in which a user can add to a volume.
+	 * <p>
+	 * This method tests the listing of the newspapers in which a user can add to a volume
+	 * 
+	 * Not exist explicit requeriments
+	 * 
+	 * Case 1: List newspapers by user 1 and volume 1. No exception is expected.
+	 * 
+	 * Case 2: List newspapers by user 1 and volume 2. No exception is expected.
+	 * 
+	 * Case 3: List newspapers by user 3 and volume 3. No exception is expected.
+	 * 
+	 * Case 4: List newspapers by nothing. IllegalArgumentException is expected.
+	 */
+
+	@Test
+	public void driverNewspaperPublicatedByPrincipal() {
+		final Object testingData[][] = {
+			{
+				"user1", "Volume1", 1, null
+			}, {
+				"user1", "Volume2", 4, null
+			}, {
+				"user3", "Volume3", 0, null
+			}, {
+				null, "Volume5", 0, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateFindNewspaperPublicatedByPrincipal((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (int) testingData[i][2], (Class<?>) testingData[i][3]);
+	}
+
+	/**
+	 * Template for testing the listing of newspapers.
+	 * <p>
+	 * This method defines the template used to test the listing of newspapers without advertisements by principal
+	 * 
+	 * @param username
+	 *            The username of the user that logs in.
+	 * @param minimumLength
+	 *            The minimum expected length of the list of newspapers without any advertisements.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateFindNewspaperPublicatedByPrincipal(final String username, final int volumeId, final int minimumLength, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			super.authenticate(username);
+			final Collection<Newspaper> res = this.newspaperService.findPublicatedNewspaperByPrincipal(volumeId);
+			Assert.notNull(res);
+			Assert.isTrue(res.size() >= minimumLength);
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
 	}
 
 }

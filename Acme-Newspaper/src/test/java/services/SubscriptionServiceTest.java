@@ -15,6 +15,8 @@ import utilities.AbstractTest;
 import domain.CreditCard;
 import domain.Newspaper;
 import domain.Subscription;
+import domain.Volume;
+import forms.SubscriptionForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -33,7 +35,7 @@ public class SubscriptionServiceTest extends AbstractTest {
 	private NewspaperService	newspaperService;
 
 	@Autowired
-	private UserService			userService;
+	private VolumeService		volumeService;
 
 
 	/**
@@ -180,7 +182,7 @@ public class SubscriptionServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * The method I are testing is necessary for display newspapers to know if the user logged is subscribed.
+	 * The method that I are testing is necessary for display newspapers to know if the user logged is subscribed.
 	 * 
 	 * Not exist explicit requirements.
 	 * 
@@ -237,11 +239,13 @@ public class SubscriptionServiceTest extends AbstractTest {
 	/**
 	 * This method is necessary for delete newspapers.
 	 * 
-	 * Not exist explicit requeriments.
+	 * Not exist explicit requirements.
 	 * 
-	 * Case 1: List of services request by rendezvous 1. Nothing is expected.
+	 * Case 1: List of subscription by newspaper 1. Nothing is expected.
 	 * 
-	 * Case 2: List of services request by rendezvous 2. Nothing is expected.
+	 * Case 2: List of subscription by newspaper 7. Nothing is expected.
+	 * 
+	 * Case 3: List of subscription by newspaper 8. Nothing is expected.
 	 */
 
 	@Test
@@ -285,167 +289,6 @@ public class SubscriptionServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * Tests the listing of newspapers created by principal.
-	 * <p>
-	 * This method tests the listing of the newspapers created by principal.
-	 * 
-	 * Not exist explicit requirements.
-	 * 
-	 * Case 1: List newspapers created by user 1. No exception is expected.
-	 * 
-	 * Case 2: List newspapers created by user 2. No exception is expected.
-	 * 
-	 * Case 3: List newspapers created by nothing. IllegalArgumentException is expected.
-	 */
-
-	@Test
-	public void driverNewspaperCreatedByPrincipal() {
-		final Object testingData[][] = {
-			{
-				"user1", 7, null
-			}, {
-				"user2", 1, null
-			}, {
-				null, 0, IllegalArgumentException.class
-			}
-		};
-		for (int i = 0; i < testingData.length; i++)
-			this.templateFindNewspaperCreatedByPrincipal((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
-	}
-
-	/**
-	 * Template for testing the listing of newspapers.
-	 * <p>
-	 * This method defines the template used to test the listing of newspapers created by principal
-	 * 
-	 * @param username
-	 *            The username of the user that logs in.
-	 * @param minimumLength
-	 *            The minimum expected length of the list of rendezvouses that the user has created.
-	 * @param expected
-	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
-	 */
-	protected void templateFindNewspaperCreatedByPrincipal(final String username, final int minimumLength, final Class<?> expected) {
-		Class<?> caught;
-		caught = null;
-		try {
-			super.authenticate(username);
-			final Collection<Newspaper> res = this.newspaperService.findNewspaperCreatedByPrincipal();
-			Assert.notNull(res);
-			Assert.isTrue(res.size() >= minimumLength);
-			super.authenticate(null);
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-		this.checkExceptions(expected, caught);
-	}
-
-	/**
-	 * Tests the listing of newspapers created an user.
-	 * <p>
-	 * This method tests the listing of the newspapers created by an user.
-	 * 
-	 * Not exist explicit requirements.
-	 * 
-	 * Case 1: List newspapers created by user 1. No exception is expected.
-	 * 
-	 * Case 2: List newspapers created by user 2. No exception is expected.
-	 * 
-	 */
-	@Test
-	public void driverNewspaperCreatedByUserId() {
-		final Object testingData[][] = {
-			{
-				"User1", 7, null
-			}, {
-				"User2", 1, null
-			}
-		};
-		for (int i = 0; i < testingData.length; i++)
-			this.templateFindNewspaperCreatedByUserId(super.getEntityId((String) testingData[i][0]), (int) testingData[i][1], (Class<?>) testingData[i][2]);
-	}
-
-	/**
-	 * Template for testing the listing of newspapers.
-	 * <p>
-	 * This method defines the template used to test the listing of newspapers created by an user.
-	 * 
-	 * @param username
-	 *            The username of the user that we want to know his newspapers.
-	 * @param minimumLength
-	 *            The minimum expected length of the list of rendezvouses that the user has created.
-	 * @param expected
-	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
-	 */
-	protected void templateFindNewspaperCreatedByUserId(final int userId, final int minimumLength, final Class<?> expected) {
-		Class<?> caught;
-		caught = null;
-		try {
-			Assert.notNull(this.userService.findOne(userId));
-			final Collection<Newspaper> res = this.newspaperService.findNewspaperCreatedByUserId(userId);
-			Assert.notNull(res);
-			Assert.isTrue(res.size() >= minimumLength);
-			super.authenticate(null);
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-		this.checkExceptions(expected, caught);
-	}
-
-	/**
-	 * Tests the listing of newspapers searched.
-	 * <p>
-	 * This method tests the listing of the newspapers searched by a keyword
-	 * 
-	 * 4.5. Search for a published newspaper using a single keyword that must appear somewhere in its title or its description.
-	 * 
-	 * Case 1: List newspapers with contains "newspaper1"
-	 * 
-	 * Case 2: List newspapers created by user 2. No exception is expected.
-	 * 
-	 */
-	@Test
-	public void driverNewspaperByKeyword() {
-		final Object testingData[][] = {
-			{
-				"newspaper1", 0, null
-			}, {
-				"newspaper", 7, null
-			}, {
-				"this", 6, null
-			}
-		};
-		for (int i = 0; i < testingData.length; i++)
-			this.templateFindNewspaperByKeyword((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
-	}
-
-	/**
-	 * Template for testing the listing of newspapers.
-	 * <p>
-	 * This method defines the template used to test the listing of newspapers created by an user.
-	 * 
-	 * @param keyword
-	 *            The keyword to search newspapers.
-	 * @param minimumLength
-	 *            The minimum expected length of the list of rendezvouses that the user has created.
-	 * @param expected
-	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
-	 */
-	protected void templateFindNewspaperByKeyword(final String keyword, final int minimumLength, final Class<?> expected) {
-		Class<?> caught;
-		caught = null;
-		try {
-			final Collection<Newspaper> res = this.newspaperService.findNewspapersByKeyword(keyword);
-			Assert.notNull(res);
-			Assert.isTrue(res.size() >= minimumLength);
-			super.authenticate(null);
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-		this.checkExceptions(expected, caught);
-	}
-
-	/**
 	 * Tests the method findAll
 	 * <p>
 	 * This method is used to test the list of all subscriptions
@@ -459,4 +302,69 @@ public class SubscriptionServiceTest extends AbstractTest {
 		Assert.isTrue(subsc.size() >= 3);
 	}
 
+	/**
+	 * This method test the subscription to a volume by a customer
+	 * 
+	 * 9.1. Subscribe to a volume by providing a credit card.
+	 * 
+	 * Case 1: Customer 1 subscribes to a volume 3. Nothing is expected.
+	 * 
+	 * Case 2: Customer 1 subscribes to a volume 1 (Free). Nothing is expected.
+	 * 
+	 * Case 3: Null subscribes to a volume. IllegalArgumentException is expected.
+	 */
+
+	@Test
+	public void driverSubscribeVolume() {
+		final Object testingData[][] = {
+			{
+				"customer1", "Volume3", null
+			}, {
+				"customer1", "Volume1", null
+			}, {
+				null, "Volume3", IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateSubscribeVolume((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (Class<?>) testingData[i][2]);
+	}
+
+	/**
+	 * This template is used to test the subscription of a volume
+	 * 
+	 * @param username
+	 *            The username of the customer.
+	 * @param volumeId
+	 *            The id of the volume that we want to subscribe it.
+	 * @param expected
+	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
+	 */
+	protected void templateSubscribeVolume(final String username, final int volumeId, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			super.authenticate(username);
+			final SubscriptionForm sf = new SubscriptionForm();
+			final CreditCard cd = new CreditCard();
+			cd.setHolderName("Manuel");
+			cd.setBrandName("Visa");
+			cd.setNumber("4935776824728742");
+			cd.setExpMonth(11);
+			cd.setExpYear(22);
+			cd.setCvv(356);
+			sf.setCreditCard(cd);
+			final Volume v = this.volumeService.findOne(volumeId);
+			sf.setVolume(v);
+			this.subscriptionService.subscribeVolume(sf);
+			Assert.isTrue(this.volumeService.findOne(volumeId).getCustomers().contains(this.customerService.findByPrincipal()));
+			for (final Newspaper n : this.volumeService.findOne(volumeId).getNewspapers())
+				if (!n.isFree())
+					Assert.notNull(this.subscriptionService.getSubscriptionByNewspaperAndPrincipal(n.getId()));
+			super.authenticate(null);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
 }

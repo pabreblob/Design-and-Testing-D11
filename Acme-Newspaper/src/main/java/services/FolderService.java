@@ -30,10 +30,10 @@ public class FolderService {
 	private ActorService		actorService;
 	@Autowired
 	private Validator			validator;
+	@Autowired
+	private MessageService		messageService;
 
 
-	//@Autowired
-	//private MessageService		messageService;
 	public Folder create() {
 		final Folder res = new Folder();
 
@@ -109,10 +109,11 @@ public class FolderService {
 
 		this.actorService.findByPrincipal().getFolders().remove(f);
 
-		//if (!f.getMessages().isEmpty())
-		//	for (final Message message : f.getMessages())
-		//		this.messageService.deleteFromFolder(message, f);
-
+		if (!f.getMessages().isEmpty()) {
+			final Collection<Message> messages = new ArrayList<>(f.getMessages());
+			for (final Message message : messages)
+				this.messageService.delete(message);
+		}
 		this.folderRepository.delete(f);
 	}
 	public Folder createNewFolder(final String name) {

@@ -959,7 +959,7 @@
 		<property name="article" ><ref bean="Article1"></ref></property>
 	</bean>
 	<bean id="FollowUp8" class="domain.FollowUp">
-		<property name="title" value="followUp8" />
+		<property name="title" value="viagra" />
 		<property name="moment" value="2017/02/27 23:10" />
 		<property name="summary" value="This is the summary of the followup" />
 		<property name="body" value="This is the body of the followup" />
@@ -970,12 +970,12 @@
 		</list>
 		</property>
 		
-		<property name="marked" value="false" />
+		<property name="marked" value="true" />
 		<property name="article" ><ref bean="Article2"></ref></property>
 	</bean>
 	<bean id="Advertisement1" class="domain.Advertisement">
 		<property name="title" value="advertisement1" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="https://www.racefoxx.com/media/image/product/2242/md/yamaha-r1-carbonfibre-engine-cover-clutch-glossy~3.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent1" />
@@ -990,7 +990,7 @@
 	</bean>
 	<bean id="Advertisement2" class="domain.Advertisement">
 		<property name="title" value="viagra" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="https://i0.wp.com/www.baddecisionsvinyl.us/wp-content/uploads/2018/03/90.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent1" />
@@ -1006,7 +1006,7 @@
 	</bean>
 	<bean id="Advertisement3" class="domain.Advertisement">
 		<property name="title" value="advertisement3" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="https://www.coches.com/fotos_historicas/honda/Civic/high_b04018aad396f2110939e61555d59fe4.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent1" />
@@ -1021,7 +1021,7 @@
 	</bean>
 	<bean id="Advertisement4" class="domain.Advertisement">
 		<property name="title" value="advertisement4" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="https://wordlesstech.com/wp-content/uploads/2012/08/Creative-Advertisements-by-Asile-1.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent1" />
@@ -1036,7 +1036,7 @@
 	</bean>
 	<bean id="Advertisement5" class="domain.Advertisement">
 		<property name="title" value="advertisement5" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="http://creativecriminals.com/pictures/post/2470/christmasadvertisements17.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent1" />
@@ -1051,7 +1051,7 @@
 	</bean>
 	<bean id="Advertisement6" class="domain.Advertisement">
 		<property name="title" value="advertisement6" />
-		<property name="bannerUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="bannerUrl" value="http://creativecriminals.com/pictures/post/2470/christmasadvertisements24.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent1" />
@@ -1066,7 +1066,7 @@
 	</bean>
 	<bean id="Advertisement7" class="domain.Advertisement">
 		<property name="title" value="advertisement7" />
-		<property name="bannerUrl" value="https://2static2.fjcdn.com/thumbnails/comments/Thekarts+used+roll+picturethekarts+rolled+image+sweet+jesus+_a17399b5c8103dd30b64ad5f7f637e74.png" />
+		<property name="bannerUrl" value="http://creativecriminals.com/pictures/post/2470/christmasadvertisements27.jpg" />
 		<property name="pageUrl" value="https://www.google.com" />
 		<property name="creditCard"><bean class="domain.CreditCard">
 					<property name="holderName" value="agent2" />

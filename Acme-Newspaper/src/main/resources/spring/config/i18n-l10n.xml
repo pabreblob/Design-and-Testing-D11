@@ -40,6 +40,7 @@
 		<value>/views/folder/messages</value>
 		<value>/views/volume/messages</value>
 		<value>/views/message/messages</value>
+		<value>/views/advertisement/messages</value>
 	</util:list>
 
 </beans>

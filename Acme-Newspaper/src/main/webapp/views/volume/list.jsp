@@ -43,22 +43,6 @@
 	<display:column property="year" title="${yearHeader}" />
 	<spring:message code="volume.price" var="priceHeader" />
 	<display:column property="price" title="${priceHeader}" />
-	<jstl:if test="${requestURI == 'volume/customer/list.do' }">
-		<display:column>
-		<jstl:set var="contains" value="false"/>
-			<jstl:forEach var="customerVolume" items="${customerVolumes}">
-				<jstl:if test="${customerVolume.id ==v.id}">
-					<jstl:set var="contains" value="true"/>
-				</jstl:if>
-			</jstl:forEach>
-			<jstl:if test="${not contains}">
-
-			<a href="subscription/customer/subscribeVolume.do?volumeId=${v.id}"> <spring:message
-					code="volume.subscribe" />
-			</a>
-		</jstl:if>
-		</display:column>
-	</jstl:if>
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column>
 	<a href="volume/display.do?volumeId=${v.id}"> <spring:message

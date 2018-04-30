@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SubscriptionRepository;
+import domain.Customer;
 import domain.Newspaper;
 import domain.Subscription;
 import forms.SubscriptionForm;
@@ -73,7 +74,12 @@ public class SubscriptionService {
 					sub.setVolume(true);
 					this.save2(sub);
 				}
-		s.getVolume().getCustomers().add(this.customerService.findByPrincipal());
+		final Customer c = this.customerService.findByPrincipal();
+		s.getVolume().getCustomers().add(c);
+		c.getVolumes().add(s.getVolume());
+
+		//this.volumeService.save(v);
+
 	}
 
 	public Subscription getSubscriptionByNewspaperAndPrincipal(final int newspaperId) {

@@ -69,7 +69,7 @@ public abstract class Actor extends DomainEntity {
 		this.address = address;
 	}
 
-	@Pattern(regexp = "(^$)|(^(\\+)?(\\d)+$)")
+	@Pattern(regexp = "(^$)|(^(\\+\\d+(\\s)*)?\\d+$)")
 	public String getPhone() {
 		return this.phone;
 	}

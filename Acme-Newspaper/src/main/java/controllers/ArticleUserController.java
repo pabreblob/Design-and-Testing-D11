@@ -107,7 +107,7 @@ public class ArticleUserController extends AbstractController {
 		else
 			try {
 				this.articleService.save(article);
-				res = new ModelAndView("redirect:/welcome/index.do");
+				res = new ModelAndView("redirect:list-editable.do");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(article, "article.commit.error");
 			}

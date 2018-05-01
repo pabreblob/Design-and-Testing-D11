@@ -44,16 +44,14 @@
 	pagesize="5" class="displaytag">
 	
 	<spring:message code="newspaper.title" var="titleHeader" />
-	<jstl:if test="${customerLogged == true}">
-	<jstl:if test="${subscribed == true}">
+	
+	<jstl:if test="${link == true }">
+	<security:authorize access ="hasRole('CUSTOMER')">
 	<display:column  title="${titleHeader}" >
-
 			<a href="article/customer/display.do?articleId=${a.id}"> <jstl:out value="${a.title}"></jstl:out>
 			</a>
 	</display:column>
-	</jstl:if>
-	</jstl:if>
-	
+	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column  title="${titleHeader}" >
@@ -63,9 +61,7 @@
 	</display:column>
 	</security:authorize>
 	
-	<jstl:if test="${customerLogged == false}">
-	<jstl:if test="${somethingLogged == true}">
-	<jstl:if test="${free == true }">
+	
 	<security:authorize access="hasRole('AGENT')">
 	<display:column  title="${titleHeader}" >
 
@@ -88,21 +84,8 @@
 	</display:column>
 	</security:authorize>
 	</jstl:if>
-	</jstl:if>
-	</jstl:if>
 	
-	<jstl:if test="${customerLogged == false}">
-	<jstl:if test="${somethingLogged == false }">
-	<display:column property="title" title="${titleHeader}" />
-	</jstl:if>
-	</jstl:if>
-	
-	<jstl:if test="${free == false}">
-	<display:column property="title" title="${titleHeader}" />
-	</jstl:if>
-	
-	
-	<jstl:if test="${needPay == true}">
+	<jstl:if test="${link == false }">
 	<display:column property="title" title="${titleHeader}" />
 	</jstl:if>
 	

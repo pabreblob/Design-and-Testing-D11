@@ -105,6 +105,8 @@ public class NewspapersUserController extends AbstractController {
 	@RequestMapping(value = "/publish", method = RequestMethod.GET)
 	public ModelAndView publish(@RequestParam final int newspaperId) {
 		final ModelAndView res;
+		final Newspaper n = this.newspaperService.findOne(newspaperId);
+		Assert.isTrue(n.getCreator().equals(this.userService.findByPrincipal()));
 		Boolean allFinal = true;
 		for (final Article a : this.articleService.findArticlesByNewspaper(newspaperId))
 			if (a.isFinalMode() == false) {

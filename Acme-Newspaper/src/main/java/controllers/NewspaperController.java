@@ -61,42 +61,30 @@ public class NewspaperController extends AbstractController {
 	//	Displaying
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int newspaperId) {
-		Boolean subscribed = true;
-		Boolean customerLogged = false;
-		Boolean somethingLogged = false;
+
 		Boolean needPay = false;
-		Boolean free = false;
+		Boolean link = false;
 		Boolean available = false;
 		final Newspaper newspaper = this.newspaperService.findOne(newspaperId);
 		Assert.notNull(newspaper);
 
 		try {
-			LoginService.getPrincipal().getId();
-			somethingLogged = true;
-		} catch (final Exception e) {
-
-		}
-		try {
-			if (this.customerService.findByPrincipal() != null)
-				customerLogged = true;
-			if (this.subscriptionService.getSubscriptionByNewspaperAndPrincipal(newspaperId) == null)
-				subscribed = false;
-
+			Assert.notNull(this.customerService.findByPrincipal());
+			if (!newspaper.isFree() && this.subscriptionService.getSubscriptionByNewspaperAndPrincipal(newspaperId) == null)
+				needPay = true;
+			link = !needPay;
 		} catch (final Exception e) {
 
 		}
 
-		if (newspaper.isFree()) {
-			subscribed = true;
-			free = true;
-			somethingLogged = true;
-		}
+		if (newspaper.isFree())
+			link = true;
 
 		try {
-			this.userService.findByPrincipal();
-			free = true;
+			Assert.notNull(this.userService.findByPrincipal());
+			link = true;
 		} catch (final Exception e) {
-
+			// TODO: handle exception
 		}
 
 		//Comprobaciones para saber si lo puede ver o no.
@@ -111,14 +99,13 @@ public class NewspaperController extends AbstractController {
 
 		try {
 			Assert.notNull(this.adminService.findByPrincipal());
+			link = true;
 			available = true;
 		} catch (final Exception e) {
 
 		}
 		Assert.isTrue(available);
-
-		if (customerLogged && !subscribed)
-			needPay = true;
+		//Para temas de url.
 
 		final ModelAndView res;
 		res = new ModelAndView("newspaper/display");
@@ -130,12 +117,9 @@ public class NewspaperController extends AbstractController {
 		else
 			pictureSize = newspaper.getPictureUrl().length();
 		res.addObject("pictureSize", pictureSize);
-		res.addObject("subscribed", subscribed);
 		res.addObject("articles", this.articleService.findArticlesByNewspaper(newspaperId));
-		res.addObject("customerLogged", customerLogged);
 		res.addObject("needPay", needPay);
-		res.addObject("free", free);
-		res.addObject("somethingLogged", somethingLogged);
+		res.addObject("link", link);
 		res.addObject("requestURI", "newspaper/display.do?newspaperId=" + newspaperId);
 		return res;
 	}

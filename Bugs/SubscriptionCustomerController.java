@@ -108,7 +108,7 @@ public class SubscriptionCustomerController extends AbstractController {
 		} else if (SubscriptionCustomerController.checkDate(s.getCreditCard().getExpMonth(), s.getCreditCard().getExpYear()) == false) {
 			res = new ModelAndView("subscription/subscribevolume");
 			res.addObject("subscriptionForm", s);
-			res.addObject("message", "subscription.invalidcc");
+			res.addObject("message", "subscription.commit.error");
 		} else
 			try {
 				Assert.isTrue(!s.getVolume().getCustomers().contains(this.customerService.findByPrincipal()));
@@ -122,7 +122,6 @@ public class SubscriptionCustomerController extends AbstractController {
 
 		return res;
 	}
-
 	private static boolean checkDate(final int month, final int year) {
 		boolean res = false;
 		final Date now = new Date();

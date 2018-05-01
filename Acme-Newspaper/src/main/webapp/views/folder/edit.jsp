@@ -25,3 +25,6 @@
 		<acme:cancel url="folder/actor/list.do?parentId=${folder.parent.id}" code="folder.cancel"/>
 	</jstl:if>
 </form:form>
+<jstl:if test="${folder.children.size() != 0}">
+	<spring:message code="folder.deleteNot"/>
+</jstl:if>

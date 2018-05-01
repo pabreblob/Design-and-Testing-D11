@@ -269,7 +269,7 @@ public class MessageServiceTest extends AbstractTest {
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateDeleteMessageNoTrash((String) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.templateDeleteMessageTrash((String) testingData[i][0], (Class<?>) testingData[i][1]);
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * @param expected
 	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
 	 */
-	public void testDeleteMessageTrash(final String username, final Class<?> expected) {
+	public void templateDeleteMessageTrash(final String username, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		try {

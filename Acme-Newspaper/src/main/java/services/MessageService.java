@@ -131,6 +131,7 @@ public class MessageService {
 		} else {
 			final Folder trashf = this.folderService.findFolderByNameAndActor("Trash box");
 			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(trashf));
+			folder.getMessages().remove(message);
 			message.setFolder(trashf);
 			trashf.getMessages().add(message);
 		}

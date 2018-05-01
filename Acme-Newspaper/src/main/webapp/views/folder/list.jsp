@@ -20,6 +20,9 @@
 	</jstl:if>
 </jstl:if>
 <h3><a href="message/actor/create.do"><spring:message code="folder.sendMessage"/></a></h3>
+<security:authorize access="hasRole('ADMIN')">
+<h3><a href="message/admin/create.do"><spring:message code="folder.broadcastMessage"/></a></h3>
+</security:authorize>
 <display:table name="folders" id="row" requestURI="folder/actor/list.do" pagesize="10" class="displaytag">
 	<spring:message code="folder.name" var="name"/>
 	<display:column property="name" title="${name}" />

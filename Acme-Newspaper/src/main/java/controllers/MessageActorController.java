@@ -42,6 +42,7 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 		final Folder f = this.folderService.findOne(folderId);
 		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(f));
+		Assert.isTrue(!f.getMessages().isEmpty());
 		final Collection<Message> messages = f.getMessages();
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
@@ -61,6 +62,8 @@ public class MessageActorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("mess") final Message mess, final BindingResult binding) {
 		ModelAndView result;
+		for (final Actor a : mess.getRecipients())
+			Assert.notNull(a);
 		final Message message = this.messageService.reconstruct(mess, binding);
 
 		if (binding.hasErrors())

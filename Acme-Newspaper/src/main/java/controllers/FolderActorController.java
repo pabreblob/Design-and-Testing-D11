@@ -32,26 +32,30 @@ public class FolderActorController extends AbstractController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(required = false) final Integer parentId) {
-		final ModelAndView res = new ModelAndView("folder/list");
+		ModelAndView res = new ModelAndView("folder/list");
 		if (parentId == null) {
 			res.addObject("name", null);
 			res.addObject("folders", this.folderService.mainFolders());
 			res.addObject("back", null);
 			res.addObject("main", true);
 			res.addObject("parent", null);
-		} else {
-			final Folder parent = this.folderService.findOne(parentId);
-			Assert.notNull(parent);
-			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
-			res.addObject("folders", parent.getChildren());
-			if (parent.getParent() == null)
-				res.addObject("back", null);
-			else
-				res.addObject("back", parent.getParent().getId());
-			res.addObject("main", false);
-			res.addObject("name", parent.getName());
-			res.addObject("parent", parentId);
-		}
+		} else
+			try {
+				final Folder parent = this.folderService.findOne(parentId);
+				Assert.notNull(parent);
+				Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(parent));
+				res.addObject("folders", parent.getChildren());
+				if (parent.getParent() == null)
+					res.addObject("back", null);
+				else
+					res.addObject("back", parent.getParent().getId());
+				res.addObject("main", false);
+				res.addObject("name", parent.getName());
+				res.addObject("parent", parentId);
+			} catch (final Throwable oops) {
+				res = this.list(null);
+				res.addObject("message", "folder.cannotCommit");
+			}
 		return res;
 	}
 
@@ -88,7 +92,7 @@ public class FolderActorController extends AbstractController {
 					this.folderService.createNewFolder(nameFolder);
 					return this.list(null);
 				} catch (final Throwable oops) {
-					return this.listWithMessage(null, "folder.cannotCommit");
+					return new ModelAndView("redirect: list.do?parentId=-1");
 				}
 		} else if (this.folderService.findFolderByNameAndActor(nameFolder) != null)
 			return this.listWithMessage(new Integer(parentId), "folder.errorNameInUse");
@@ -104,7 +108,7 @@ public class FolderActorController extends AbstractController {
 				this.folderService.addChild(f, parent);
 				return this.list(parent.getId());
 			} catch (final Throwable oops) {
-				return this.listWithMessage(new Integer(parentId), "folder.cannotCommit");
+				return new ModelAndView("redirect: list.do?parentId=-1");
 			}
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

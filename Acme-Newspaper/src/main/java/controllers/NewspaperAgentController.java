@@ -34,8 +34,6 @@ public class NewspaperAgentController extends AbstractController {
 		ModelAndView res;
 		Collection<Newspaper> newspapers;
 		newspapers = this.newspaperService.findNewspapersWithAdvertisementByAgent();
-		System.out.println(newspapers);
-
 		res = new ModelAndView("newspaper/list");
 		res.addObject("newspapers", newspapers);
 		res.addObject("requestURI", "newspaper/agent/list.do");
@@ -48,8 +46,6 @@ public class NewspaperAgentController extends AbstractController {
 		ModelAndView res;
 		Collection<Newspaper> newspapers;
 		newspapers = this.newspaperService.findNewspapersWithoutAdvertisementByAgent();
-		System.out.println(newspapers);
-
 		res = new ModelAndView("newspaper/list");
 		res.addObject("newspapers", newspapers);
 		res.addObject("requestURI", "newspaper/agent/list-without.do");

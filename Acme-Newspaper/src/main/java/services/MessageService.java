@@ -61,7 +61,7 @@ public class MessageService {
 	}
 
 	public Message save(final Message message) {
-		assert message != null;
+		Assert.notNull(message);
 		final String body = message.getBody().toLowerCase();
 		final String subject = message.getSubject().toLowerCase();
 		final Collection<TabooWord> tw = this.tabooWordService.findAll();
@@ -95,7 +95,7 @@ public class MessageService {
 		return res;
 	}
 	public Message broadcast(final Message message) {
-		assert message != null;
+		Assert.notNull(message);
 		final Actor sender = this.actorService.findByPrincipal();
 		message.setSender(sender);
 		message.setMoment(new Date(System.currentTimeMillis() - 1000));
@@ -117,45 +117,44 @@ public class MessageService {
 	}
 
 	public void delete(final Message message) {
-		assert message != null;
+		Assert.notNull(message);
 		final Folder folder = message.getFolder();
-		assert folder != null;
-		assert message.getId() != 0;
-		assert folder.getId() != 0;
+		Assert.notNull(folder);
+		Assert.isTrue(message.getId() != 0);
+		Assert.isTrue(folder.getId() != 0);
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(folder));
 		Assert.isTrue(this.messageRepository.exists(message.getId()));
-		assert folder.getMessages().contains(message);
+		Assert.isTrue(folder.getMessages().contains(message));
 		if (folder.getName().equals("Trash box")) {
 			folder.getMessages().remove(message);
 			this.messageRepository.delete(message.getId());
 		} else {
-			final Actor owner = this.actorService.findByPrincipal();
-			folder.getMessages().remove(message);
-			for (final Folder f : owner.getFolders())
-				if (f.getName().equals("Trash box")) {
-					message.setFolder(f);
-					f.getMessages().add(message);
-					break;
-				}
+			final Folder trashf = this.folderService.findFolderByNameAndActor("Trash box");
+			Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(trashf));
+			message.setFolder(trashf);
+			trashf.getMessages().add(message);
 		}
 	}
 
 	public void moveToFolder(final Message message, final Folder target) {
-		assert message != null;
+		Assert.notNull(message);
 		final Folder source = message.getFolder();
-		assert source != null;
-		assert target != null;
-		assert message.getId() != 0;
-		assert source.getId() != 0;
-		assert target.getId() != 0;
+		Assert.notNull(source);
+		Assert.notNull(target);
+		Assert.isTrue(message.getId() != 0);
+		Assert.isTrue(source.getId() != 0);
+		Assert.isTrue(target.getId() != 0);
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(source));
+		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(target));
 		Assert.isTrue(this.messageRepository.exists(message.getId()));
-		assert source.getMessages().contains(message);
+		Assert.isTrue(source.getMessages().contains(message));
 		source.getMessages().remove(message);
 		message.setFolder(target);
 		target.getMessages().add(message);
 	}
 
 	public Collection<Message> findMessagesByFolderId(final int folderId) {
-		assert folderId != 0;
+		Assert.isTrue(folderId != 0);
 		final Collection<Message> res = this.messageRepository.findMessagesByFolderId(folderId);
 		return res;
 	}

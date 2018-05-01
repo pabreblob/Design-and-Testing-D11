@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import security.UserAccount;
 import utilities.AbstractTest;
@@ -39,9 +38,9 @@ public class CustomerServiceTest extends AbstractTest {
 			{
 				"testname", "testpass", null
 			}, {
-				null, "testpass", IllegalArgumentException.class
+				"", "testpass", IllegalArgumentException.class
 			}, {
-				"testname", null, IllegalArgumentException.class
+				"testname", "", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -74,9 +73,7 @@ public class CustomerServiceTest extends AbstractTest {
 			test.setEmail("test@test.com");
 			test.setPhone("");
 			test.setAddress("");
-			final Customer res = this.customerService.save(test);
-			Assert.notNull(res);
-			Assert.isTrue(res.equals(this.customerService.findOne(res.getId())));
+			this.customerService.save(test);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

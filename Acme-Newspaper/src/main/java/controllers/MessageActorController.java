@@ -108,6 +108,7 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 		final Message message = this.messageService.findOne(Integer.valueOf(request.getParameter("mess")));
 		final Folder target = this.folderService.findOne(Integer.valueOf(request.getParameter("target")));
+		Assert.notNull(target);
 		this.messageService.moveToFolder(message, target);
 		result = new ModelAndView("redirect:/message/actor/list.do?folderId=" + target.getId());
 		return result;

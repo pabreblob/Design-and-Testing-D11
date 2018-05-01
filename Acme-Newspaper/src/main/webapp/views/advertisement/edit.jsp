@@ -20,7 +20,7 @@
 	<acme:textbox code="advertisement.title" path="title" />
 	<acme:textbox code="advertisement.bannerUrl" path="bannerUrl" />
 	<acme:textbox code="advertisement.pageUrl" path="pageUrl" />
-	
+	<h3><spring:message code="advertisement.creditcard"/></h3>
 	<acme:textbox code="advertisement.holderName" path="creditCard.holderName" />
 	<acme:textbox code="advertisement.brandName" path="creditCard.brandName" />
 	<acme:textbox code="advertisement.number" path="creditCard.number" />

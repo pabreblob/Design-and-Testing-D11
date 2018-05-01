@@ -62,10 +62,7 @@ public class TabooWordService {
 
 		final TabooWord res = this.tabooWordRepository.save(tw);
 
-		if (tw.getId() == 0)
-			this.updateNewWord(tw);
-		else
-			this.updateWords();
+		this.updateNewWord(tw);
 
 		return res;
 	}
@@ -90,19 +87,19 @@ public class TabooWordService {
 		final Collection<Advertisement> advs = this.advertisementService.findAll();
 
 		for (final Article a : arts)
-			a.setMarked(a.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+			a.setMarked(a.isMarked() || a.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
 		for (final Chirp c : chirps)
-			c.setMarked(c.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || c.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+			c.setMarked(c.isMarked() || c.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || c.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
 		for (final FollowUp f : folls)
-			f.setMarked(f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getTitle().contains(tw.getWord()));
+			f.setMarked(f.isMarked() || f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getTitle().contains(tw.getWord()));
 
 		for (final Newspaper n : newsps)
-			n.setMarked(n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+			n.setMarked(n.isMarked() || n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
 		for (final Advertisement a : advs)
-			a.setMarked(a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+			a.setMarked(a.isMarked() || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 	}
 	protected void updateWords() {
 		final Collection<TabooWord> all = this.findAll();
@@ -113,24 +110,36 @@ public class TabooWordService {
 		final Collection<Newspaper> newsps = this.newspaperService.findAll();
 		final Collection<Advertisement> advs = this.advertisementService.findAll();
 
-		for (final Article a : arts)
+		for (final Article a : arts) {
+			a.setMarked(false);
 			for (final TabooWord tw : all)
-				a.setMarked(a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+				a.setMarked(a.isMarked() || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*")
+					|| a.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+		}
 
-		for (final Chirp c : chirps)
+		for (final Chirp c : chirps) {
+			c.setMarked(false);
 			for (final TabooWord tw : all)
-				c.setMarked(c.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || c.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+				c.setMarked(c.isMarked() || c.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || c.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+		}
 
-		for (final FollowUp f : folls)
+		for (final FollowUp f : folls) {
+			f.setMarked(false);
 			for (final TabooWord tw : all)
-				f.setMarked(f.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+				f.setMarked(f.isMarked() || f.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*")
+					|| f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+		}
 
-		for (final Newspaper n : newsps)
+		for (final Newspaper n : newsps) {
+			n.setMarked(false);
 			for (final TabooWord tw : all)
-				n.setMarked(n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().matches(".*\\b" + tw.getWord() + "\\b.*"));
+				n.setMarked(n.isMarked() || n.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || n.getTitle().matches(".*\\b" + tw.getWord() + "\\b.*"));
+		}
 
-		for (final Advertisement a : advs)
+		for (final Advertisement a : advs) {
+			a.setMarked(false);
 			for (final TabooWord tw : all)
-				a.setMarked(a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+				a.setMarked(a.isMarked() || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
+		}
 	}
 }

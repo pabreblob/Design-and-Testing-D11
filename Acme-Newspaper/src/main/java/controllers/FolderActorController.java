@@ -131,6 +131,8 @@ public class FolderActorController extends AbstractController {
 	@RequestMapping(value = "/saveEdit", method = RequestMethod.POST)
 	public ModelAndView editSave(final Folder folder, final BindingResult br) {
 		final Folder f = this.folderService.reconstruct(folder, br);
+		if (br.hasErrors())
+			return this.editWithMessage(folder.getId(), "folder.cannotCommit");
 		try {
 			this.folderService.saveRename(f);
 			if (f.getParent() == null)

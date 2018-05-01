@@ -12,7 +12,6 @@
 <form:form action="folder/actor/saveEdit.do" modelAttribute="folder">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="parent.id"/>
 	<acme:textbox code="folder.name" path="name"/>
 	<acme:submit name="submit" code="folder.submit"/>
 	<jstl:if test="${folder.children.size() == 0}">

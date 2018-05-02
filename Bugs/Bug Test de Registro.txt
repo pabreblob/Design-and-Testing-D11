@@ -1,0 +1,1 @@
+Eliminado la linea del @SafeHTML en el archivo UserAccount.java de la carpeta security, lo que permite hacer XSS en el username de cualquier actor

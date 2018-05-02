@@ -43,18 +43,14 @@ public class AdvertisementAgentController extends AbstractController {
 		if (binding.hasErrors()) {
 			res = new ModelAndView("advertisement/edit");
 			res.addObject("advertisement", adv);
-			System.out.println("tengo el error aquí");
-			System.out.println(binding);
 		} else
 			try {
 				this.advertisementService.save(advertisement);
 				res = new ModelAndView("redirect:/newspaper/agent/list.do");
-				System.out.println("no hay ningún error");
 			} catch (final Throwable oops) {
 				res = new ModelAndView("advertisement/edit");
 				res.addObject("advertisement", adv);
 				res.addObject("message", "advertisement.error");
-				System.out.println("errores en el catch");
 			}
 
 		return res;

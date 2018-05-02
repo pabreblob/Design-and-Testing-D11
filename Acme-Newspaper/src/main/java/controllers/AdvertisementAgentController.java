@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,20 +40,36 @@ public class AdvertisementAgentController extends AbstractController {
 	@RequestMapping(value = "/edit", params = "submit", method = RequestMethod.POST)
 	public ModelAndView save(final Advertisement adv, final BindingResult binding) {
 		ModelAndView res;
-		final Advertisement advertisement = this.advertisementService.reconstruct(adv, binding);
+		final Advertisement advr = this.advertisementService.reconstruct(adv, binding);
 
 		if (binding.hasErrors()) {
 			res = new ModelAndView("advertisement/edit");
 			res.addObject("advertisement", adv);
+		} else if (!this.checkDate(adv.getCreditCard().getExpMonth(), adv.getCreditCard().getExpYear())) {
+			res = new ModelAndView("advertisement/edit");
+			res.addObject("advertisement", adv);
+			res.addObject("message", "advertisement.invalidcc");
 		} else
 			try {
-				this.advertisementService.save(advertisement);
+				this.advertisementService.save(advr);
 				res = new ModelAndView("redirect:/newspaper/agent/list.do");
 			} catch (final Throwable oops) {
 				res = new ModelAndView("advertisement/edit");
 				res.addObject("advertisement", adv);
 				res.addObject("message", "advertisement.error");
 			}
+
+		return res;
+	}
+
+	@SuppressWarnings("deprecation")
+	private boolean checkDate(final int month, final int year) {
+		boolean res = false;
+		final Date now = new Date();
+		if (now.getYear() - 100 < year)
+			res = true;
+		if (now.getYear() - 100 == year && now.getMonth() + 1 <= month)
+			res = true;
 
 		return res;
 	}

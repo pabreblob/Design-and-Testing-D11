@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="misc/panic" extends="master.page">
+		<put-attribute name="title" value="Panic" />
+		<put-attribute name="body" value="/views/misc/panic.jsp" />
+	</definition>
+	<definition name="misc/terms" extends="master.page">
+		<put-attribute name="title" value="Terms" />
+		<put-attribute name="body" value="/views/misc/terms.jsp" />
+	</definition>
+	<definition name="misc/contact" extends="master.page">
+		<put-attribute name="title" value="Contact info" />
+		<put-attribute name="body" value="/views/misc/contact.jsp" />
+	</definition>
+	<definition name="misc/cookies" extends="master.page">
+		<put-attribute name="title" value="Cookie policy" />
+		<put-attribute name="body" value="/views/misc/cookies.jsp" />
+	</definition>
+	<definition name="misc/403" extends="master.page">
+		<put-attribute name="title" value="Forbidden" />
+		<put-attribute name="body" value="/views/misc/403.jsp" />
+	</definition>
+	
+</tiles-definitions>

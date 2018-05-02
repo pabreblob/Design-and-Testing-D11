@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user4" />
+		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="customer1" />
+		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="customer2" />
+		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="customer3" />
+		<property name="password" value="033f7f6121501ae98285ad77f216d5e7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="customer4" />
+		<property name="password" value="55feb130be438e686ad6a80d12dd8f44" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CUSTOMER" />
+				</bean>
+			</list>
+		</property>
+	</bean> -->
+	
+
+	
+	
+	<!-- Other domain beans come here -->	
+	<bean id="Admin" class="domain.Admin">
+		<property name="name" value="admin" />
+		<property name="surname" value="admsur" />
+		<property name="address" value="adminaddress" />
+		<property name="phone" value="681331066" />	
+		<property name="email" value="admin@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount1" />
+		</property>
+	</bean>
+	<!-- <bean id="User1" class="domain.User">
+		<property name="name" value="user1" />
+		<property name="surname" value="user1sur" />
+		<property name="address" value="user1address" />
+		<property name="phone" value="681331076" />	
+		<property name="email" value="user1@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount2" />
+		</property>
+		<property name="followers">
+		<list>
+		<ref bean="User2" />
+		<ref bean="User3" />
+		</list>	
+		</property>
+			<property name="following">
+			<list>
+		<ref bean="User2" />
+		</list>
+		</property>
+	</bean>
+	<bean id="User2" class="domain.User">
+		<property name="name" value="user2" />
+		<property name="surname" value="user2sur" />
+		<property name="address" value="user2address" />
+		<property name="phone" value="681331076" />	
+		<property name="email" value="user2@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount3" />
+		</property>
+		<property name="followers">
+		<list>
+		<ref bean="User1" />
+		</list>	
+		</property>
+			<property name="following">
+			<list>
+		<ref bean="User1" />
+		</list>
+		</property>
+	</bean>
+	<bean id="User3" class="domain.User">
+		<property name="name" value="user3" />
+		<property name="surname" value="user3sur" />
+		<property name="address"><null/></property>
+		<property name="phone" ><null/></property>	
+		<property name="email" value="use3@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount4" />
+		</property>
+		<property name="followers">
+		<list>
+		</list>	
+		</property>
+			<property name="following">
+			<list>
+		<ref bean="User1" />
+		</list>
+		</property>
+	</bean>
+	<bean id="User4" class="domain.User">
+		<property name="name" value="user4" />
+		<property name="surname" value="user4sur" />
+		<property name="address" value="user4address" />
+		<property name="phone" value="681361076" />	
+		<property name="email" value="user4@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount5" />
+		</property>
+		<property name="followers">
+		<list>
+		
+		</list>	
+		</property>
+			<property name="following">
+			<list>
+		
+		</list>
+		</property>
+	</bean>
+	<bean id="Customer1" class="domain.Customer">
+		<property name="name" value="customer1" />
+		<property name="surname" value="customer1sur" />
+		<property name="address" value="customer1address" />
+		<property name="phone" value="689361076" />	
+		<property name="email" value="customer1@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount6" />
+		</property>
+		
+	</bean>
+	<bean id="Customer2" class="domain.Customer">
+		<property name="name" value="customer2" />
+		<property name="surname" value="customer2sur" />
+		<property name="address" value="customer2address" />
+		<property name="phone" value="689361077" />	
+		<property name="email" value="customer2@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount7" />
+		</property>
+	</bean>
+	<bean id="Customer3" class="domain.Customer">
+		<property name="name" value="customer3" />
+		<property name="surname" value="customer3sur" />
+		<property name="address" value="customer3address" />
+		<property name="phone" value="689362076" />	
+		<property name="email" value="customer3@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount8" />
+		</property>
+	</bean>
+	<bean id="Customer4" class="domain.Customer">
+		<property name="name" value="customer4" />
+		<property name="surname" value="customer4sur" />
+		<property name="address" value="customer4address" />
+		<property name="phone" value="689352076" />	
+		<property name="email" value="customer4@gmail.com" />
+		<property name="userAccount">
+			<ref bean="userAccount9" />
+		</property>
+	</bean> -->
+	<bean id="TabooWord1" class="domain.TabooWord">
+		<property name="word" value="viagra" />
+	</bean>
+	<bean id="TabooWord2" class="domain.TabooWord">
+		<property name="word" value="sex" />
+	</bean>
+	<bean id="TabooWord3" class="domain.TabooWord">
+		<property name="word" value="sexo" />
+	</bean>
+	<bean id="TabooWord4" class="domain.TabooWord">
+		<property name="word" value="cialis" />
+	</bean>
+	<!-- <bean id="Chirp1" class="domain.Chirp">
+		<property name="moment" value="2017/03/20 16:12" />
+		<property name="title" value="title1" />
+		<property name="description" value="desc1" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Chirp2" class="domain.Chirp">
+		<property name="moment" value="2017/04/20 16:12" />
+		<property name="title" value="title2" />
+		<property name="description" value="viagra" />
+		<property name="marked" value="true" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Chirp3" class="domain.Chirp">
+		<property name="moment" value="2017/03/10 16:12" />
+		<property name="title" value="title3" />
+		<property name="description" value="desc3" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Chirp4" class="domain.Chirp">
+		<property name="moment" value="2017/03/10 16:42" />
+		<property name="title" value="title4" />
+		<property name="description" value="desc4" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Chirp5" class="domain.Chirp">
+		<property name="moment" value="2017/03/22 16:12" />
+		<property name="title" value="title5" />
+		<property name="description" value="desc5" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Chirp6" class="domain.Chirp">
+		<property name="moment" value="2017/08/20 16:12" />
+		<property name="title" value="title6" />
+		<property name="description" value="desc6" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Chirp7" class="domain.Chirp">
+		<property name="moment" value="2017/06/20 16:12" />
+		<property name="title" value="title7" />
+		<property name="description" value="desc7" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User2"></ref></property>
+	</bean>
+	<bean id="Chirp8" class="domain.Chirp">
+		<property name="moment" value="2018/03/20 16:12" />
+		<property name="title" value="title8" />
+		<property name="description" value="desc8" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User3"></ref></property>
+	</bean>
+	<bean id="Newspaper1" class="domain.Newspaper">
+		<property name="title" value="newspaper1" />
+		<property name="publicationDate"><null/></property>
+		<property name="description" value="This is newspaper1" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="0.0"/>
+		<property name="free" value="true" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Newspaper2" class="domain.Newspaper">
+		<property name="title" value="newspaper2" />
+		<property name="publicationDate" value="2017/02/24 23:00" />
+		<property name="description" value="This is newspaper2" />
+		<property name="pictureUrl"><null/></property>
+		<property name="price" value="0.0"/>
+		<property name="free" value="true" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Newspaper3" class="domain.Newspaper">
+		<property name="title" value="newspaper3" />
+		<property name="publicationDate" value="2017/02/23 23:00" />
+		<property name="description" value="This is newspaper3" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="0.0"/>
+		<property name="free" value="true" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Newspaper4" class="domain.Newspaper">
+		<property name="title" value="newspaper4" />
+		<property name="publicationDate" value="2017/02/22 23:00" />
+		<property name="description" value="This is newspaper4" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="0.0"/>
+		<property name="free" value="true" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Newspaper5" class="domain.Newspaper">
+		<property name="title" value="newspaper5" />
+		<property name="publicationDate" value="2017/02/21 23:00" />
+		<property name="description" value="This is newspaper5" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg"/>
+		<property name="price" value="0.0"/>
+		<property name="free" value="true" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Newspaper6" class="domain.Newspaper">
+		<property name="title" value="newspaper6" />
+		<property name="publicationDate" ><null/></property>
+		<property name="description" value="This is newspaper6" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="26.0"/>
+		<property name="free" value="false" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Newspaper7" class="domain.Newspaper">
+		<property name="title" value="newspaper7" />
+		<property name="publicationDate" value="2017/02/20 23:00" />
+		<property name="description" value="This is newspaper7" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="20.0"/>
+		<property name="free" value="false" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User2"></ref></property>
+	</bean>
+	<bean id="Newspaper8" class="domain.Newspaper">
+		<property name="title" value="newspaper8" />
+		<property name="publicationDate" value="2017/02/20 23:00" />
+		<property name="description" value="Sex" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="20.0"/>
+		<property name="free" value="false" />
+		<property name="marked" value="true" />
+		<property name="creator"><ref bean="User3"></ref></property>
+	</bean>
+	<bean id="Newspaper9" class="domain.Newspaper">
+		<property name="title" value="newspape9" />
+		<property name="publicationDate" value="2017/02/20 23:00" />
+		<property name="description" value="This is newspaper9" />
+		<property name="pictureUrl" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg" />
+		<property name="price" value="0.0"/>
+		<property name="free" value="true" />
+		<property name="marked" value="false" />
+		<property name="creator"><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Subscription1" class="domain.Subscription">
+		<property name="creditCard"><bean class="domain.CreditCard">
+					<property name="holderName" value="customer1" />
+					<property name="brandName" value="brand1" />
+					<property name="number" value="5521054892890001" />
+					<property name="expMonth" value="10" />
+					<property name="expYear" value="18" />
+					<property name="cvv" value="156" />
+				</bean></property>
+		<property name="newspaper" ><ref bean="Newspaper7"></ref></property>
+		<property name="customer" ><ref bean="Customer1"></ref></property>
+	</bean>
+	<bean id="Subscription2" class="domain.Subscription">
+		<property name="creditCard"><bean class="domain.CreditCard">
+					<property name="holderName" value="customer1" />
+					<property name="brandName" value="brand1" />
+					<property name="number" value="5521054892890001" />
+					<property name="expMonth" value="10" />
+					<property name="expYear" value="18" />
+					<property name="cvv" value="156" />
+				</bean></property>
+		<property name="newspaper" ><ref bean="Newspaper8"></ref></property>
+		<property name="customer" ><ref bean="Customer1"></ref></property>
+	</bean>
+	<bean id="Subscription3" class="domain.Subscription">
+		<property name="creditCard"><bean class="domain.CreditCard">
+					<property name="holderName" value="customer2" />
+					<property name="brandName" value="brand1" />
+					<property name="number" value="4916524284571696" />
+					<property name="expMonth" value="10" />
+					<property name="expYear" value="20" />
+					<property name="cvv" value="136" />
+				</bean></property>
+		<property name="newspaper" ><ref bean="Newspaper8"></ref></property>
+		<property name="customer" ><ref bean="Customer2"></ref></property>
+	</bean>
+	<bean id="Article1" class="domain.Article">
+		<property name="title" value="article1" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article2" class="domain.Article">
+		<property name="title" value="article2" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article3" class="domain.Article">
+		<property name="title" value="article3" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article4" class="domain.Article">
+		<property name="title" value="article4" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article5" class="domain.Article">
+		<property name="title" value="article5" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article6" class="domain.Article">
+		<property name="title" value="article6" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User2"></ref></property>
+	</bean>
+	<bean id="Article7" class="domain.Article">
+		<property name="title" value="article7" />
+		<property name="moment" value="2017/02/24 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper2"></ref></property>
+		<property name="creator" ><ref bean="User2"></ref></property>
+	</bean>
+	<bean id="Article8" class="domain.Article">
+		<property name="title" value="article8" />
+		<property name="moment" value="2017/02/23 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper3"></ref></property>
+		<property name="creator" ><ref bean="User2"></ref></property>
+	</bean>
+	<bean id="Article9" class="domain.Article">
+		<property name="title" value="article9" />
+		<property name="moment" value="2017/02/22 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper4"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article10" class="domain.Article">
+		<property name="title" value="article10" />
+		<property name="moment" value="2017/02/21 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper5"></ref></property>
+		<property name="creator" ><ref bean="User2"></ref></property>
+	</bean>
+	<bean id="Article11" class="domain.Article">
+		<property name="title" value="article11" />
+		<property name="moment" value="2017/02/20 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper7"></ref></property>
+		<property name="creator" ><ref bean="User1"></ref></property>
+	</bean>
+	<bean id="Article12" class="domain.Article">
+		<property name="title" value="article12" />
+		<property name="moment" value="2017/02/20 23:00" />
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="sex "/>
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="marked" value="true" />
+		<property name="newspaper" ><ref bean="Newspaper8"></ref></property>
+		<property name="creator" ><ref bean="User3"></ref></property>
+	</bean>
+	<bean id="Article13" class="domain.Article">
+		<property name="title" value="article13" />
+		<property name="moment"><null/></property>
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="false" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper1"></ref></property>
+		<property name="creator" ><ref bean="User3"></ref></property>
+	</bean>
+	<bean id="Article14" class="domain.Article">
+		<property name="title" value="article14" />
+		<property name="moment"><null/></property>
+		<property name="summary" value="This is the summary of the article" />
+		<property name="body" value="This is the body of the article" />
+		<property name="pictureUrls">
+		<list>
+		
+		</list>
+		</property>
+		<property name="finalMode" value="false" />
+		<property name="marked" value="false" />
+		<property name="newspaper" ><ref bean="Newspaper9"></ref></property>
+		<property name="creator" ><ref bean="User3"></ref></property>
+	</bean>
+	<bean id="FollowUp2" class="domain.FollowUp">
+		<property name="title" value="followUp2" />
+		<property name="moment" value="2017/05/27 23:00" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article1"></ref></property>
+	</bean>
+	<bean id="FollowUp3" class="domain.FollowUp">
+		<property name="title" value="followUp3" />
+		<property name="moment" value="2017/03/29 23:00" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article1"></ref></property>
+	</bean>
+	<bean id="FollowUp4" class="domain.FollowUp">
+		<property name="title" value="followUp4" />
+		<property name="moment" value="2017/02/28 23:00" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article1"></ref></property>
+	</bean>
+	<bean id="FollowUp5" class="domain.FollowUp">
+		<property name="title" value="followUp5" />
+		<property name="moment" value="2017/04/27 23:00" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article1"></ref></property>
+	</bean>
+	<bean id="FollowUp6" class="domain.FollowUp">
+		<property name="title" value="followUp6" />
+		<property name="moment" value="2017/03/27 23:00" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article1"></ref></property>
+	</bean>
+	<bean id="FollowUp7" class="domain.FollowUp">
+		<property name="title" value="followUp6" />
+		<property name="moment" value="2017/02/27 23:10" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article1"></ref></property>
+	</bean>
+	<bean id="FollowUp8" class="domain.FollowUp">
+		<property name="title" value="followUp8" />
+		<property name="moment" value="2017/02/27 23:10" />
+		<property name="summary" value="This is the summary of the followup" />
+		<property name="body" value="This is the body of the followup" />
+		<property name="pictureUrls">
+		<list>
+		<value>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg/250px-Central_park_manhattan_2_New_York_photo_D_Ramey_Logan.jpg</value>
+		<value>https://static.boredpanda.com/blog/wp-content/uuuploads/landscape-photography/landscape-photography-15.jpg</value>
+		</list>
+		</property>
+		
+		<property name="marked" value="false" />
+		<property name="article" ><ref bean="Article2"></ref></property>
+	</bean>
+	 -->
+
+</beans>

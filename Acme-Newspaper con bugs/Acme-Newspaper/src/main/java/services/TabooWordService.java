@@ -81,16 +81,12 @@ public class TabooWordService {
 
 	protected void updateNewWord(final TabooWord tw) {
 		final Collection<Article> arts = this.articleService.findAll();
-		final Collection<Chirp> chirps = this.chirpService.findAll();
 		final Collection<FollowUp> folls = this.followupService.findAll();
 		final Collection<Newspaper> newsps = this.newspaperService.findAll();
 		final Collection<Advertisement> advs = this.advertisementService.findAll();
 
 		for (final Article a : arts)
 			a.setMarked(a.isMarked() || a.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || a.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
-
-		for (final Chirp c : chirps)
-			c.setMarked(c.isMarked() || c.getDescription().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || c.getTitle().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*"));
 
 		for (final FollowUp f : folls)
 			f.setMarked(f.isMarked() || f.getBody().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getSummary().toLowerCase().matches(".*\\b" + tw.getWord() + "\\b.*") || f.getTitle().contains(tw.getWord()));

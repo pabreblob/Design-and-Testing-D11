@@ -79,7 +79,8 @@ public class MessageService {
 		message.setMoment(new Date(System.currentTimeMillis() - 1000));
 		Message res;
 		res = this.messageRepository.save(message);
-		final Collection<Actor> recipients = message.getRecipients();
+		final Collection<Actor> recipients = new ArrayList<Actor>();
+		recipients.add(new ArrayList<Actor>(message.getRecipients()).get(0));
 		res.getFolder().getMessages().add(res);
 		for (final Actor a : recipients)
 			for (final Folder f : a.getFolders())

@@ -83,7 +83,7 @@ public class VolumeServiceTest extends AbstractTest {
 			final Volume volume = this.volumeService.createVolume();
 			volume.setTitle(volumeTitle);
 			volume.setDescription("desc");
-			volume.setYear(2018);
+			volume.setYear("2018");
 			volume.setPrice(20.0);
 			this.volumeService.save(volume);
 			this.volumeService.addNewspaper(volume,this.newspaperService.findOne(newspaperId) );

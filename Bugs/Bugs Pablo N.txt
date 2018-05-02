@@ -1,2 +1,3 @@
 Los chirps no se marcan adecuadamente. En el servicio de Taboo Word, se han borrado las líneas 84, 92, 93 y 94.
 Los advertisements no se crean, aunque no haya ningún fallo ni salga mensaje de error. En el controlador, se han borrado las líneas 41 y 50.
+Es posible crear un advertisement con una tarjeta de crédito caducada. En el controlador, se ha eliminado el método que comprueba la fecha junto a un apartado "else if" en el "save" en el que se llama al método y se devuelve la vista correcta.

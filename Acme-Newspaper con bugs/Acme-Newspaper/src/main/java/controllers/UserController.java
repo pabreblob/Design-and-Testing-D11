@@ -125,7 +125,7 @@ public class UserController extends AbstractController {
 			} else {
 				final User u = this.userService.findOne(userId);
 				result.addObject("user", u);
-				result.addObject("articles", this.articleService.findPublishedArticlesByUser(userId));
+				result.addObject("articles", null);
 				result.addObject("chirps", this.chirpService.findByCreatorId(userId));
 				if (userId != principal.getId()) {
 					if (principal.getFollowing().contains(u))

@@ -1,0 +1,6 @@
+Modificado la linea 128 de UserController.java que añadía los artículos a la vista posterior:
+Antes:
+	result.addObject("articles", this.articleService.findPublishedArticlesByUser(userId));
+Ahora:
+	result.addObject("articles", null);
+Esto impide que se muestren los artículos DE OTRO USUARIO Y CUANDO ESTÉS LOGUEADO

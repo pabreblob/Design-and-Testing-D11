@@ -49,7 +49,6 @@ public class ArticleController extends AbstractController {
 		int advertisementSize=advs.size();
 
 		res = new ModelAndView("article/display");
-		//res.addObject("bannerUrl", bannerUrl);
 		res.addObject("advertisementSize", advertisementSize);
 		res.addObject("article", article);
 		res.addObject("hasFollowUps", hasFollowUps);

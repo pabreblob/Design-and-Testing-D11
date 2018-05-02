@@ -1,0 +1,3 @@
+Comentado en articleController res.addObject("bannerUrl", bannerUrl); al mostrar articulo como anonimo, no sale imagen
+En articleController, cambiada la requesturi de list-search para que falle la paginación
+Cambiado el boton de cancel en el search.jsp de article para que falle

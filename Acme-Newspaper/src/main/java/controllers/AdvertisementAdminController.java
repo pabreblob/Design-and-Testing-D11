@@ -44,7 +44,7 @@ public class AdvertisementAdminController extends AbstractController {
 		final ModelAndView res = new ModelAndView("advertisement/list");
 		try {
 			this.advertisementService.delete(a);
-			res.addObject("advertisement", this.advertisementService.findAll());
+			res.addObject("advertisements", this.advertisementService.findAll());
 		} catch (final Throwable oops) {
 			res.addObject("message", "advertisement.error");
 		}

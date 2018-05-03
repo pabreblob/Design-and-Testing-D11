@@ -1,7 +1,8 @@
 
 package controllers;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,15 +63,9 @@ public class AdvertisementAgentController extends AbstractController {
 		return res;
 	}
 
-	@SuppressWarnings("deprecation")
 	private boolean checkDate(final int month, final int year) {
-		boolean res = false;
-		final Date now = new Date();
-		if (now.getYear() - 100 < year)
-			res = true;
-		if (now.getYear() - 100 == year && now.getMonth() + 1 <= month)
-			res = true;
-
+		final GregorianCalendar now = new GregorianCalendar();
+		final boolean res = ((now.get(Calendar.YEAR) - 2000) == year && (now.get(Calendar.MONTH) + 1) < month) || ((now.get(Calendar.YEAR) - 2000) < year);
 		return res;
 	}
 

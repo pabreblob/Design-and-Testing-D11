@@ -37,7 +37,7 @@ public class AgentController extends AbstractController {
 			result = this.createEditModelAndView(userForm);
 		else if (userForm.isAcceptTerms() == false)
 			result = this.createEditModelAndView(userForm, "user.notAccepted.error");
-		else if (!(userForm.getConfirmPass().equals(userForm.getUserAccount().getPassword())))
+		else if (!(userForm.getConfirmPass().equals(userForm.getPassword())))
 			result = this.createEditModelAndView(userForm, "user.differentPass.error");
 		else
 			try {

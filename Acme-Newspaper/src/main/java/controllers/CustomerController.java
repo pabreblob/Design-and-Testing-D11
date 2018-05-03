@@ -57,7 +57,7 @@ public class CustomerController extends AbstractController {
 		} else if (userForm.isAcceptTerms() == false) {
 			result = this.createEditModelAndView(userForm, "user.notAccepted.error");
 			System.out.println("No aceptado los términos");
-		} else if (!(userForm.getConfirmPass().equals(userForm.getUserAccount().getPassword()))) {
+		} else if (!(userForm.getConfirmPass().equals(userForm.getPassword()))) {
 			result = this.createEditModelAndView(userForm, "user.differentPass.error");
 			System.out.println("Contraseñas distintas");
 		} else

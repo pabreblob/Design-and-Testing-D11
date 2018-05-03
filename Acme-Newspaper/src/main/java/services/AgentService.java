@@ -123,8 +123,8 @@ public class AgentService {
 		res.setAddress(userForm.getAddress());
 		res.setPhone(userForm.getPhone());
 		res.setEmail(userForm.getEmail());
-		res.getUserAccount().setUsername(userForm.getUserAccount().getUsername());
-		res.getUserAccount().setPassword(userForm.getUserAccount().getPassword());
+		res.getUserAccount().setUsername(userForm.getUsername());
+		res.getUserAccount().setPassword(userForm.getPassword());
 
 		this.validator.validate(res, binding);
 		return res;

@@ -16,8 +16,8 @@
 	<form:hidden path="userAccount.id"/>
 	<form:hidden path="userAccount.version"/>
 	
-	<acme:textbox code="user.username" path="userAccount.username" />
-	<acme:password code="user.password" path="userAccount.password" />
+	<acme:textbox code="user.username" path="username" />
+	<acme:password code="user.password" path="password" />
 	<acme:password code="user.confirmPassword" path="confirmPass" />
 	<acme:textbox code="user.name" path="name" />
 	<acme:textbox code="user.surname" path="surname" />

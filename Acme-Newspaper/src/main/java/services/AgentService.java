@@ -94,6 +94,7 @@ public class AgentService {
 
 	public Agent findOne(final int agentId) {
 		Assert.isTrue(agentId != 0);
+		Assert.notNull(this.agentRepository.findOne(agentId));
 		final Agent res = this.agentRepository.findOne(agentId);
 		return res;
 	}
@@ -104,8 +105,9 @@ public class AgentService {
 		return res;
 	}
 
-	public Agent findByAgentAccountId(final int userAccountId) {
+	public Agent findAgentByUserAccountId(final int userAccountId) {
 		Assert.isTrue(userAccountId != 0);
+		Assert.notNull(this.agentRepository.findAgentByUserAccountId(userAccountId));
 		final Agent res = this.agentRepository.findAgentByUserAccountId(userAccountId);
 		return res;
 	}

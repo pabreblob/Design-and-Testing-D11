@@ -42,12 +42,6 @@ public class ChirpService {
 
 		final Chirp res = new Chirp();
 
-		//final Date moment = new Date(System.currentTimeMillis() - 1000);
-
-		//res.setMarked(false);
-		//res.setCreator(c);
-		//res.setMoment(moment);
-
 		return res;
 	}
 
@@ -63,7 +57,6 @@ public class ChirpService {
 		final Collection<TabooWord> tw = this.tabooWordService.findAll();
 		boolean taboow = false;
 		for (final TabooWord word : tw) {
-			//c.setMarked(c.getDescription().toLowerCase().matches(".*\\b" + t.getWord() + "\\b.*") || c.getTitle().toLowerCase().matches(".*\\b" + t.getWord() + "\\b.*"));
 			taboow = c.getTitle().toLowerCase().matches(".*\\b" + word.getWord() + "\\b.*");
 			taboow |= c.getDescription().toLowerCase().matches(".*\\b" + word.getWord() + "\\b.*");
 			if (taboow)
@@ -79,6 +72,7 @@ public class ChirpService {
 
 	public Chirp findOne(final int chirpId) {
 		Assert.isTrue(chirpId > 0);
+		Assert.notNull(this.chirpRepository.findOne(chirpId));
 		return this.chirpRepository.findOne(chirpId);
 	}
 

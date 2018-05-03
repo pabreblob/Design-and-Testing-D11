@@ -49,6 +49,7 @@ public class TabooWordService {
 
 	public TabooWord findOne(final int tabooWordId) {
 		Assert.isTrue(tabooWordId > 0);
+		Assert.notNull(this.tabooWordRepository.findOne(tabooWordId));
 		return this.tabooWordRepository.findOne(tabooWordId);
 	}
 

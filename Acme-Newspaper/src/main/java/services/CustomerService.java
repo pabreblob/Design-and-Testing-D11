@@ -103,6 +103,7 @@ public class CustomerService {
 
 	public Customer findOne(final int idCustomer) {
 		Assert.isTrue(idCustomer != 0);
+		Assert.notNull(this.customerRepository.findOne(idCustomer));
 		final Customer res = this.customerRepository.findOne(idCustomer);
 		return res;
 	}
@@ -116,6 +117,7 @@ public class CustomerService {
 	public Customer findCustomerByUserAccountId(final int customerAccountId) {
 		Assert.isTrue(customerAccountId != 0);
 		Customer res;
+		Assert.notNull(this.customerRepository.findCustomerByUserAccountId(customerAccountId));
 		res = this.customerRepository.findCustomerByUserAccountId(customerAccountId);
 		return res;
 	}

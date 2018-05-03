@@ -77,6 +77,7 @@ public class AdvertisementService {
 
 	public Advertisement findOne(final int advId) {
 		Assert.isTrue(advId > 0);
+		Assert.notNull(this.advertisementRepository.findOne(advId));
 		return this.advertisementRepository.findOne(advId);
 	}
 
@@ -117,6 +118,5 @@ public class AdvertisementService {
 		final String res = advertisement.getBannerUrl();
 		return res;
 	}
-
 
 }

@@ -63,6 +63,7 @@ public class NewspaperService {
 
 	public Newspaper findOne(final int newspaperId) {
 		final Newspaper res = this.newspaperRepository.findOne(newspaperId);
+		Assert.notNull(res);
 		return res;
 	}
 

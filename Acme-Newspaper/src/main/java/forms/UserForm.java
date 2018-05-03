@@ -3,30 +3,26 @@ package forms;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-import security.UserAccount;
-
 @Access(AccessType.PROPERTY)
 public class UserForm {
 
-	private String		name;
-	private String		surname;
-	private String		address;
-	private String		phone;
-	private String		email;
-	private String		confirmPass;
-	private boolean		acceptTerms;
+	private String	name;
+	private String	surname;
+	private String	address;
+	private String	phone;
+	private String	email;
+	private String	confirmPass;
+	private boolean	acceptTerms;
 
-	private UserAccount	userAccount;
+	private String	username;
+	private String	password;
 
 
 	public UserForm() {
@@ -82,17 +78,26 @@ public class UserForm {
 		this.email = email;
 	}
 
-	@NotNull
-	@Valid
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	public UserAccount getUserAccount() {
-		return this.userAccount;
+	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserAccount(final UserAccount userAccount) {
-		this.userAccount = userAccount;
+	public void setUsername(final String username) {
+		this.username = username;
 	}
-	@NotBlank
+
+	@Size(min = 5, max = 32)
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	@Size(min = 5, max = 32)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getConfirmPass() {
 		return this.confirmPass;

@@ -156,10 +156,17 @@ public class UserService {
 		res.setAddress(userForm.getAddress());
 		res.setPhone(userForm.getPhone());
 		res.setEmail(userForm.getEmail());
-		res.getUserAccount().setUsername(userForm.getUserAccount().getUsername());
-		res.getUserAccount().setPassword(userForm.getUserAccount().getPassword());
+		res.getUserAccount().setUsername(userForm.getUsername());
+		res.getUserAccount().setPassword(userForm.getPassword());
 
-		this.validator.validate(res, binding);
+		System.out.println("A" + userForm.getName());
+		System.out.println(userForm.getSurname());
+		System.out.println(userForm.getAddress());
+		System.out.println(userForm.getPhone());
+		System.out.println(userForm.getEmail());
+		System.out.println(userForm.getUsername());
+		System.out.println(userForm.getPassword());
+		this.validator.validate(userForm, binding);
 		return res;
 	}
 

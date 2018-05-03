@@ -100,6 +100,7 @@ public class FollowUpService {
 		Assert.isTrue(followUpId != 0);
 		FollowUp res;
 		res = this.followUpRepository.findOne(followUpId);
+		Assert.isTrue(res!=null);
 
 		return res;
 	}

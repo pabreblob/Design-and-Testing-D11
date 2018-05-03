@@ -100,6 +100,7 @@ public class ArticleService {
 		Assert.isTrue(articleId != 0);
 		Article res;
 		res = this.articleRepository.findOne(articleId);
+		Assert.isTrue(res!=null);
 
 		return res;
 	}

@@ -28,8 +28,6 @@ public class VolumeService {
 	@Autowired
 	private UserService			userService;
 	@Autowired
-	private SubscriptionService		subscriptionService;
-	@Autowired
 	private Validator			validator;
 
 
@@ -71,6 +69,7 @@ public class VolumeService {
 		Assert.isTrue(volumeId != 0);
 		Volume res;
 		res = this.volumeRepository.findOne(volumeId);
+		Assert.isTrue(res!=null);
 
 		return res;
 	}

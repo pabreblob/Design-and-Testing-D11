@@ -42,7 +42,6 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 		final Folder f = this.folderService.findOne(folderId);
 		Assert.isTrue(this.actorService.findByPrincipal().getFolders().contains(f));
-		Assert.isTrue(!f.getMessages().isEmpty());
 		final Collection<Message> messages = f.getMessages();
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);

@@ -53,6 +53,7 @@ public class MessageService {
 	public Message findOne(final int messageId) {
 		Message res;
 		res = this.messageRepository.findOne(messageId);
+		Assert.notNull(res);
 		return res;
 	}
 

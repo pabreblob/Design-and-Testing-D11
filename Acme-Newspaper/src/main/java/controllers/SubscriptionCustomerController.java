@@ -66,6 +66,7 @@ public class SubscriptionCustomerController extends AbstractController {
 	@RequestMapping(value = "/subscribe", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Subscription s, final BindingResult binding) {
 		ModelAndView res;
+		//Assert.isNull(this.subscriptionService.getSubscriptionByNewspaperAndPrincipal(s.getNewspaper().getId()));
 		if (binding.hasErrors()) {
 			res = new ModelAndView("subscription/edit");
 			res.addObject("subscription", s);
@@ -79,7 +80,7 @@ public class SubscriptionCustomerController extends AbstractController {
 				Assert.isTrue(!s.isVolume());
 				res = new ModelAndView("redirect:/newspaper/display.do?newspaperId=" + s.getNewspaper().getId());
 			} catch (final Throwable oops) {
-				res = new ModelAndView("newspaper/edit");
+				res = new ModelAndView("subscription/edit");
 				res.addObject("subscription", s);
 				res.addObject("message", "subscription.commit.error");
 			}
@@ -115,7 +116,7 @@ public class SubscriptionCustomerController extends AbstractController {
 				this.subscriptionService.subscribeVolume(s);
 				res = new ModelAndView("redirect:/volume/display.do?volumeId=" + s.getVolume().getId());
 			} catch (final Throwable oops) {
-				res = new ModelAndView("newspaper/subscribevolume");
+				res = new ModelAndView("subscription/subscribevolume");
 				res.addObject("subscriptionForm", s);
 				res.addObject("message", "subscription.commit.error");
 			}

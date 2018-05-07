@@ -254,8 +254,9 @@ public class NewspaperServiceTest extends AbstractTest {
 	public void testDeleteNewspaper() {
 		super.authenticate("admin");
 		final int newspaperId = super.getEntityId("Newspaper7");
+		final Newspaper n = this.newspaperService.findOne(newspaperId);
 		this.newspaperService.delete(newspaperId);
-		Assert.isNull(this.newspaperService.findOne(newspaperId));
+		Assert.isTrue(!this.newspaperService.findAll().contains(n));
 		super.authenticate(null);
 
 	}

@@ -12,10 +12,6 @@
 
 <form:form action="agent/save.do" modelAttribute="userForm">
 	
-	<form:hidden path="userAccount.authorities"/>
-	<form:hidden path="userAccount.id"/>
-	<form:hidden path="userAccount.version"/>
-	
 	<acme:textbox code="user.username" path="username" />
 	<acme:password code="user.password" path="password" />
 	<acme:password code="user.confirmPassword" path="confirmPass" />

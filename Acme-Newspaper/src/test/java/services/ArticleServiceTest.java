@@ -176,7 +176,7 @@ public class ArticleServiceTest extends AbstractTest {
 			}, {
 				"admin", "non-existent", NullPointerException.class
 			}, {
-				"user1", "Article1", NullPointerException.class
+				"user1", "Article1", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)

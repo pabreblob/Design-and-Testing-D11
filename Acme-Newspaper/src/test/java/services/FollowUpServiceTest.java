@@ -110,7 +110,7 @@ public class FollowUpServiceTest extends AbstractTest {
 			}, {
 				"admin", "non-existent", NullPointerException.class
 			}, {
-				"user1", "FollowUp2", NullPointerException.class
+				"user1", "FollowUp2", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)

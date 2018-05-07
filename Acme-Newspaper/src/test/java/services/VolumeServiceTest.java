@@ -37,22 +37,51 @@ public class VolumeServiceTest extends AbstractTest {
 	 * 1. Create a volume with as many published newspapers as he or she wishes. Note that the newspapers in a volume can<br>
 	 *  be added or removed at any time. The same newspaper may be used to create different volumes.
 	 * Case 1: An user creates a volume and then adds a newspaper he has created. When listing the newspapers of that volume, the newspaper the user has added must appear. The process is done succesfully. <br>
-	 * Case 2: An user creates a volume and then adds a newspaper he has not created. When listing the newspapers of that volume, the newspaper the user has added must appear. The process is expected to fail. <br>
-	 * Case 3: An user creates a volume and then adds a newspaper that does not exist. When listing the newspapers of that volume, the newspaper the user has added must appear. The process is expected to fail. <br>
+	 * Case 2: An user creates a volume and then adds a newspaper he has not created. The process is expected to fail. <br>
+	 * Case 3: An user creates a volume and then adds a newspaper that does not exist. The process is expected to fail. <br>
+	 * Case 4: An user creates a volume and then a different user tries to add a newspaper he has created. The process is expected to fail. <br>
+	 * Case 5: An user creates a volume and then a different user tries to add a newspaper he has not created. The process is expected to fail. <br>
+	 * Case 6: An user creates a volume and then a different user tries to add a newspaper that does not exist. The process is expected to fail. <br>
+	 * Case 7: An user creates a volume and then an unauthenticated user tries to add a newspaper the volume creator has created. The process is expected to fail. <br>
+	 * Case 8: An user creates a volume and then an unauthenticated user tries to add a newspaper the volume creator has not created. The process is expected to fail. <br>
+	 * Case 9: An user creates a volume and then an unauthenticated user tries to add a newspaper that does not exist. <br>
+	 * Case 10: An unauthenticated actor creates a volume and then adds a newspaper. The process is expected to fail. <br>
 	 */
 	@Test
-	public void driverSaveArticle() {
+	public void driverSaveVolume() {
 		final Object testingData[][] = {
 			{
-				"user1", "Testvolume1","Newspaper2", null
+				"user1", "Testvolume1","user1","Newspaper2", null
 			}, {
-				"user1", "Testvolume2","Newspaper7", IllegalArgumentException.class
+				"user1", "Testvolume2","user1","Newspaper7", IllegalArgumentException.class
 			}, {
-				"user1", "Testvolume3","non-valid", NullPointerException.class
+				"user1", "Testvolume3","user1","non-valid", NullPointerException.class
+				
+			},{
+				"user1", "Testvolume4","user2","Newspaper7", IllegalArgumentException.class
+				
+			},{
+				"user1", "Testvolume5","user2","Newspaper2", IllegalArgumentException.class
+			},
+			{
+				"user1", "Testvolume6","user2","non-valid", NullPointerException.class
+			}
+			,
+			{
+				"user1", "Testvolume7",null,"Newspaper2", IllegalArgumentException.class
+			},
+			{
+				"user1", "Testvolume8",null,"Newspaper7", IllegalArgumentException.class
+			},
+			{
+				"user1", "Testvolume9",null,"non-valid", NullPointerException.class
+			},
+			{
+				"null", "Testvolume10",null,"Newspaper2", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateSave((String) testingData[i][0],(String) testingData[i][1], (String) testingData[i][2],(Class<?>) testingData[i][3]);
+			this.templateSave((String) testingData[i][0],(String) testingData[i][1], (String) testingData[i][2],(String) testingData[i][3],(Class<?>) testingData[i][4]);
 	}
 	
 
@@ -65,12 +94,14 @@ public class VolumeServiceTest extends AbstractTest {
 	 *            The user that creates the volume. It must not be null.
 	 * @param volumeTitle
 	 *            The title of the volume that is being created. It must not be null.
+	 * @param user2
+	 *            The user that edits the volume. It must not be null. It must be the same that created it in the first place.
 	 * @param newspaperName
 	 *            The name of the newspaper the user wants to add to the volume. It must not be null, it must be a newspaper the user has published and it must not have been already added to the volume.
 	 * @param expected
 	 *            The expected exception to be thrown. Use <code>null</code> if no exception is expected.
 	 */
-	protected void templateSave(final String user1, final String volumeTitle,  final String newspaperName, final Class<?> expected) {
+	protected void templateSave(final String user1, final String volumeTitle,String user2, final String newspaperName, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		Integer newspaperId;
@@ -86,8 +117,11 @@ public class VolumeServiceTest extends AbstractTest {
 			volume.setYear("2018");
 			volume.setPrice(20.0);
 			this.volumeService.save(volume);
+			super.authenticate(null);
+			super.authenticate(user2);
 			this.volumeService.addNewspaper(volume,this.newspaperService.findOne(newspaperId) );
 			Assert.isTrue(volume.getNewspapers().contains(this.newspaperService.findOne(newspaperId)));
+			super.authenticate(null);
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -105,7 +139,7 @@ public class VolumeServiceTest extends AbstractTest {
 	 * Case 3: An user edits a volume that does not exist. The process is expected to fail. <br>
 	 */
 	@Test
-	public void driverEditArticle() {
+	public void driverEditVolume() {
 		final Object testingData[][] = {
 			{
 				"user1", "Volume2",null
@@ -160,7 +194,7 @@ public class VolumeServiceTest extends AbstractTest {
 	 * Case 3: An user removes a newspaper from a volume that does not exist. The process is expected to fail. <br>
 	 */
 	@Test
-	public void driverRemoveArticle() {
+	public void driverRemoveNewspaper() {
 		final Object testingData[][] = {
 			{
 				"user1", "Volume2","Newspaper2",null

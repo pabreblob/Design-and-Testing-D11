@@ -20,7 +20,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<display:table name="newspapers" id="n" keepStatus = "true" requestURI="${requestURI}"
+<display:table name="newspapers" id="n" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 	
 	<jstl:if test="${requestURI == 'newspaper/user/list-available.do'}">

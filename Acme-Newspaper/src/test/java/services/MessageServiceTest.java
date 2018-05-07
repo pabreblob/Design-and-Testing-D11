@@ -302,9 +302,8 @@ public class MessageServiceTest extends AbstractTest {
 			Assert.isTrue(found != null);
 			Assert.isTrue(found.getFolder().getName().equals("Trash box"));
 			this.messageService.delete(found);
-			final Message found2 = this.messageService.findOne(found.getId());
-			Assert.isTrue(found2 == null);
-			Assert.isTrue(trashf != null && !trashf.getMessages().contains(found2));
+			Assert.isTrue(!this.messageService.findAll().contains(found));
+			Assert.isTrue(trashf != null && !trashf.getMessages().contains(found));
 			super.authenticate(null);
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

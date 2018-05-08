@@ -24,8 +24,8 @@
 	<acme:textbox code="advertisement.holderName" path="creditCard.holderName" />
 	<acme:textbox code="advertisement.brandName" path="creditCard.brandName" />
 	<acme:textbox code="advertisement.number" path="creditCard.number" />
-	<acme:textbox code="advertisement.expMonth" path="creditCard.expMonth" />
-	<acme:textbox code="advertisement.expYear" path="creditCard.expYear" />
+	<acme:textbox code="advertisement.expMonth" path="creditCard.expMonth" placeholder="mm"/>
+	<acme:textbox code="advertisement.expYear" path="creditCard.expYear" placeholder = "yy"/>
 	<acme:textbox code="advertisement.cvv" path="creditCard.cvv" />
 	
 	<acme:submit name="submit" code="advertisement.submit" />

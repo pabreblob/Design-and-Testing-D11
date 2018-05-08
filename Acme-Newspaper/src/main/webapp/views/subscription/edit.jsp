@@ -25,8 +25,8 @@
 		<acme:textbox code="subscription.holderName" path="creditCard.holderName" />
 		<acme:textbox code="subscription.brandName" path="creditCard.brandName" />
 		<acme:textbox code="subscription.number" path="creditCard.number" />
-		<acme:textbox code="subscription.expMonth" path="creditCard.expMonth" />
-		<acme:textbox code="subscription.expYear" path="creditCard.expYear" />
+		<acme:textbox code="subscription.expMonth" path="creditCard.expMonth" placeholder="mm"/>
+		<acme:textbox code="subscription.expYear" path="creditCard.expYear" placeholder = "yy"/>
 		<acme:textbox code="subscription.cvv" path="creditCard.cvv" />
 
 

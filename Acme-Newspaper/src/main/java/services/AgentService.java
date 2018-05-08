@@ -128,7 +128,7 @@ public class AgentService {
 		res.getUserAccount().setUsername(userForm.getUsername());
 		res.getUserAccount().setPassword(userForm.getPassword());
 
-		this.validator.validate(res, binding);
+		this.validator.validate(userForm, binding);
 		return res;
 
 	}

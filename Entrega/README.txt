@@ -16,3 +16,8 @@ A newspaper is considered privated if its price is greater than 0. Otherwise, it
 -----Known issues-----
 The publication date when listing chirps is only available in the format yyyy/mm/dd HH:MM because otherwise, 
 the listing can not order them by their publication date properly.
+
+When an user creates a newspaper, if he tries to add the newspaper to a volume, the list of available newspapers to add was shown incorrectly, 
+some columns were not displayed. After logging out and the logging in as the same user, the issue was solved. In order to prevent this, we removed
+the "keep status" from the newspaper listing
+

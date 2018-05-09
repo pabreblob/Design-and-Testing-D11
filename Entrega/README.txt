@@ -11,6 +11,9 @@ add to a volume newspapers that he has created and that are in final mode.
 When it comes to the creation of advertisements, we have considered that an agent can only create one advertisement
 per newspaper.
 The price of the volumes is the total price of the newspapers that it contains.
+When adding a newspaper to a volume that has users subscribed to it, users are not automatically subscribed to that volume.
+The reason why we have decided to do so is because due to how the price calculation of the volume works, the user subscribed to the volume has not paid for
+that newspaper.
 A newspaper is considered privated if its price is greater than 0. Otherwise, it is considered a public newspaper.
 
 -----Known issues-----
